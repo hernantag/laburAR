@@ -1,0 +1,296 @@
+body{
+    background-color: #EEEEEE;
+}
+.navheader{
+    position: sticky;
+    top: 0;
+    padding: 10px 10px 10px 10px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    font-family: 'Poppins';
+    font-size: 15px;
+    color: #EEEEEE;
+    border-bottom: 0.2px solid #EEEEEE  ;
+
+}
+.nav-Items{
+    margin: 10px 10px 10px 10px ;
+    max-height: 4%;
+}
+a{
+    text-decoration: none;
+    color: #EEEEEE;
+}
+a:hover{
+    color: #222831;
+}
+.divImage-Index{
+
+    height: 100vh;
+    width: 100%;
+    background-color: #EEEEEE;
+    background: url(/img/indeximage.jpg) no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+ 
+}
+.divCenterIndexText{
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 80px;
+    color: #EEEEEE;
+}
+.divBehindImage{
+    min-height: 100vh;
+    background-color: #EEEEEE;
+}
+
+.div-TextIndex{
+    margin: auto;
+    
+    font-family: 'Roboto';
+    margin-top: 2%;
+    font-size: 1rem;
+    color: #393E46;
+    width: 70%;
+    background-color: #EEEEEE;
+}
+.div-TextTittle{
+    margin: auto;
+    
+    font-family: 'Roboto';
+    font-weight: bold;
+    margin-top: 2%;
+    font-size: 1.1rem;
+    color: #393E46;
+    width: 70%;
+    background-color: #EEEEEE;
+}
+
+#firstTittle{
+    margin-top: 6%;
+}
+.div-space{
+    margin-top: 3%;
+    visibility: hidden;
+}
+
+.div-ImageIndex{
+    margin: auto;
+    
+    margin-top: 2%;
+    
+    
+    width: 70%;
+    
+}
+.div-ImageIndex img{
+    
+
+    
+    
+    max-width: 100%;
+    
+}
+
+.div-ContactUs{
+    text-align: center;
+    margin-top: 10%;
+    height: 70vh;
+    background-color: #222831;
+}
+.div-ContactUs-tittle{
+    padding-top: 2%;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: #EEEEEE;
+    font-size: 1.2rem;
+}
+
+
+
+
+/* HERE STARTS SIGNUP CSS */
+/* HERE STARTS SIGNUP CSS */
+/* HERE STARTS SIGNUP CSS */
+/* HERE STARTS SIGNUP CSS */
+/* HERE STARTS SIGNUP CSS */
+/* HERE STARTS SIGNUP CSS */
+
+
+
+
+.navHeaderSignup{
+    height: 12vh;
+    
+}
+
+
+.signUpTittle{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    font-family: 'Roboto';
+    
+    color: #393E46;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 15vh;
+
+}
+.divBodySignup{
+    width: 90%;
+    margin: auto;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+    height: 120vh;
+    
+}
+
+.divBodySignup-Left{
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding:12% 12% 12% 12% ;
+    width: 30%;
+    background: url(/img/indeximage22.jpg) no-repeat center;
+    background-size: cover;
+    background-position: 54% 4%;
+    height: 100%;
+    
+}
+.divBodySignup-Right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 1.05rem;
+    padding: 20% 8% 20%  8% ;
+    width: 70%;
+    background-color: #fff;
+    height: 100%;
+    
+}
+
+.divBodySignup-Right a{
+    color:#00ADB5;
+
+}
+.divBodySignup-Right a:hover{
+    color:black;
+    
+}
+.divBodySignup-Right select{
+    margin-bottom: 3%;
+    border:none;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #EEEEEE;
+    padding: 1.5%;
+    font-weight: bold;
+
+}
+
+.divBodySignup-Right select:focus{
+    outline: none;
+
+}
+
+.divBodySignup-Right option{
+    border: none;
+
+}
+.divBodySignup-Right button{
+    width: 25%;
+    border: none;
+    border-radius: 5px;
+    background-color: #00ADB5;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 1px  1px 0px 0px #92969c;
+    padding: 1%;
+
+}
+.divBodySignup-Right-textTittle{
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 1.5rem;
+    
+    
+}
+.divBodySignup-Right-textTittle a{
+  color: #00ADB5;
+    
+}
+.divBodySignup-Right-textTittle a:hover{
+    color: #393E46;
+      
+  }
+  
+
+.inputSignup{
+    
+    background-color: #EEEEEE;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px 0px #00ADB5 ;
+    padding: 12px 22px;
+    border: none;
+    border-bottom: solid 2px #00ADB5;
+    border-right: solid 1px #00ADB5 ;
+}
+
+.div2InputsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+#checkboxdiv{
+    
+    justify-content: start;
+    width: 100%;
+}
+#checkbox{
+    margin-top: 1%;
+    margin-right: 1.5%;
+}
+#alreadyRegistered{
+    margin-top: 5%;
+    justify-content: start;
+    
+}
+#Logueate{
+    margin-left: 1.5%;
+}
+
+#buttonRegister{
+    margin-top: 3%;
+}
+
+#registerTittle{
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 8%;
+}
+.divInputPlusLabel{
+    margin-bottom: 4%;
+    width: 45%;
+}
+
+.inputSignup:focus{
+    border-right: none ;
+    outline: none;
+    
+}
