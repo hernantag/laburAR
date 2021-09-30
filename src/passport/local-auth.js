@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
   });
   
   passport.deserializeUser(async (id, done) => {
-    const fila = await pool.query("SELECT * FROM usuarios WHERE idusuario = ?", [
+    const fila = await pool.query("SELECT * FROM usuario WHERE idusuario = ?", [
       id
     ]);
     return done(null, fila[0]);
@@ -24,7 +24,7 @@ passport.use('local-signup', new localStrategy({
 
     console.log(req.body);
     const verificarExistencia = await pool.query(
-      "SELECT * FROM usuarios where correo = ?",
+      "SELECT * FROM usuario where correo = ?",
       [email]
     );
 
@@ -41,18 +41,19 @@ passport.use('local-signup', new localStrategy({
     console.log(req.body)
 
 
-    const { nombre,apellido,DNI, tipo } = req.body;
+    const { nombre,apellido,DNI, tipo,fecha } = req.body;
 
     let nuevoUsuario = {
-      nombre,
-      apellido,
+      DNI,
       correo: req.body.email,
       contraseña: req.body.password,
       tipo,
-      DNI
+      nombre,
+      apellido,
+      fecha
     };
 
-    const resultado = await pool.query("INSERT INTO usuarios SET ?", [
+    const resultado = await pool.query("INSERT INTO usuario SET ?", [
       nuevoUsuario
     ]);
 
@@ -67,7 +68,7 @@ passport.use('local-signin',new localStrategy({
 },async (req,email,password,done) =>{
 
 console.log(req.body);
-const user = await pool.query('SELECT * FROM usuarios WHERE correo = ?', [email] )
+const user = await pool.query('SELECT * FROM usuario WHERE correo = ?', [email] )
 
 
 if (!user){
