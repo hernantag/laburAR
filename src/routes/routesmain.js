@@ -5,19 +5,38 @@ const router = express.Router()
 
 
 
+
+
+router.post('/signup', passport.authenticate('local-signup',{
+    successRedirect:'/',
+    failureRedirect:'/signup',
+    passReqToCallback:true
+}))
+
+router.post('/signin', passport.authenticate('local-signin',{
+    successRedirect:'/',
+    failureRedirect:'/signin',
+    passReqToCallback:true
+}))
+
+
+
 router.get('/', (req,res,next) =>{
+    if (req.isAuthenticated()){
+        if (req.user.tipo == "ofertante") res.redirect("/inicio/Ofertante");
+        if (req.user.tipo == "solicitante") res.redirect("/inicio/Solicitante");
+    }
     res.render('index.ejs')
 })
+
+
+
 
 router.get('/signup', (req,res,next) =>{
     res.render('signup.ejs')
 })
 
-/*router.post('/signup', passport.authenticate('local-signup',{
-    successRedirect:'/',
-    failureRedirect:'/signup',
-    passReqToCallback:true
-}))*/
+
 
 
 
@@ -45,9 +64,5 @@ function isAuthenticated(req,res,next){
     }
 }
 
-router.post('/signin', passport.authenticate('local-signin',{
-    successRedirect:'/',
-    failureRedirect:'/signin',
-    passReqToCallback:true
-}))
+
 module.exports= router

@@ -33,7 +33,8 @@ app.use(express.static(__dirname + "/public"));
 
 //ROUTER
 app.use(require('./routes/routesmain'))
-
+app.use(require('./routes/Usuarios/ofertantes'))
+app.use(require('./routes/Usuarios/Solicitantes'))
 
 //SERVER LISTENING
 app.listen(app.get('port'), ()=>{
