@@ -25,6 +25,7 @@ router.get('/', (req,res,next) =>{
     if (req.isAuthenticated()){
         if (req.user.tipo == "ofertante") res.redirect("/inicio/Ofertante");
         if (req.user.tipo == "solicitante") res.redirect("/inicio/Solicitante");
+        if (req.user.tipo == "admin") res.redirect("/inicio/Admin");
     }
     res.render('index.ejs')
 })
