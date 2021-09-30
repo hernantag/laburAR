@@ -28,7 +28,7 @@
 
         <div class="divBodySignup-Right">
           <p id="registerTittle">Ingresa</p>
-          <form action="">
+          <form action="/signin" method="POST">
 
 
        
@@ -36,31 +36,29 @@
 
                  <div class="divInputPlusLabel">
                    <label for="">Correo Electronico</label>
-                   <input class="inputSignup" type="text" name="" id="" placeholder="Tu correo">
+                   <input class="inputSignup" type="text" name="email" id="" placeholder="Tu correo">
                </div> 
 
 
                <div class="divInputPlusLabel">
                 <label for="">Contraseña</label>
-                <input class="inputSignup" type="password" name="" id="" placeholder="Tu contraseña">
+                <input class="inputSignup" type="password" name="password" id="" placeholder="Tu contraseña">
             </div> 
 
          </div>
 
-        
-         
-   
-         
+           <button id="buttonRegister" type="submit">Confirmar</button>
 
-           <button id="buttonRegister">Ingresa</button>
+          </form>
 
-           <div class="div2InputsContainer" id="alreadyRegistered">
-             ¿Aun no tienes una cuenta? 
-           <a href="/signup" id="Logueate"> Registrate</a>
-       
-   </div> 
+
+              <div class="div2InputsContainer" id="alreadyRegistered">
+                ¿Aun no tienes una cuenta? 
+              <a href="/signup" id="Logueate"> Registrate</a>
+          
+        </div> 
            
- </form>
+
         </div>
 
      </div>
