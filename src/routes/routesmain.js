@@ -3,7 +3,9 @@ const passport = require('passport')
 const router = express.Router()
 
 
-
+router.get('/inicio', (req,res,next) =>{
+    res.render('inicio.ejs')
+})
 
 router.get('/', (req,res,next) =>{
     res.render('index.ejs')

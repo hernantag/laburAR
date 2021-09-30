@@ -1,0 +1,17 @@
+.headerContainer{
+    height: 10vh;
+    background-color: aqua;
+    width: 100%;
+}
+
+.headerContainerInside{
+    height: 100%;
+    background-color: rebeccapurple;
+    
+}
+
+.headerContainerInside ul{
+    list-style-type: none;
+    display: table-cell;
+
+}
