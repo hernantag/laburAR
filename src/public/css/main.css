@@ -315,3 +315,6 @@ a:hover{
     border-right: solid 1px #00ADB5 ;
 
 }
+#date:focus{ 
+    outline: none;
+}

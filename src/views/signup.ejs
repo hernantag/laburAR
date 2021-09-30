@@ -83,12 +83,15 @@
                 </select>
             </div> 
 
+            <% const today = new Date(); %>
+            <% fechaMinima =  today.getFullYear() +  "-" +  "0" +  (today.getMonth() + 1) +  "-" +  today.getDate(); %>
 
             <div class="divInputPlusLabel">
               <label for="Fecha">Fecha de nacimiento</label>
-              <input type="date" id="date" name="trip-start"
-                     value="2018-07-22"
-                     min="2018-01-01" max="2018-12-31">
+              <input type="date" id="date" name="fecha"
+                     value=<%= fechaMinima %>
+                     min="2018-01-01" max= <%= fechaMinima %> >
+                      
               
             </div>
 
