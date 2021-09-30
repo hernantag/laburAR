@@ -13,11 +13,11 @@ router.get('/signup', (req,res,next) =>{
     res.render('signup.ejs')
 })
 
-router.post('/signup', passport.authenticate('local-signup',{
+/*router.post('/signup', passport.authenticate('local-signup',{
     successRedirect:'/',
     failureRedirect:'/signup',
     passReqToCallback:true
-}))
+}))*/
 
 
 
