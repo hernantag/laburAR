@@ -12,41 +12,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
     <title>Signup</title>
 </head>
+
+
 <body>
-    <!-- <header>
-        
-           <div class="navHeaderSignup">
-               asd
-           </div>
-        </header> -->
-        
-      
+
 
         <div class="divBodySignup">
-
-
-         
-           <div class="divBodySignup-Left">
-            
+       
+           <div class="divBodySignup-Left">    
            </div>
+
 
 
            <div class="divBodySignup-Right">
              <p id="registerTittle">Registrate</p>
-             <form action="">
+             <form action="/signup" method="POST">
 
 
             <div class="div2InputsContainer">
 
               <div class="divInputPlusLabel">
                 <label for="">Nombre</label>
-                <input class="inputSignup" type="text" name="" id="" placeholder="Tu nombre">
+                <input class="inputSignup" type="text" name="nombre" id="" placeholder="Tu nombre" required>
             </div> 
            
 
             <div class="divInputPlusLabel">
                 <label for="">Apellido</label >
-                <input class="inputSignup" type="text" name="" id="" placeholder="Tu apellido">
+                <input class="inputSignup" type="text" name="apellido" id="apellido" placeholder="Tu apellido" required>
             </div> 
 
             </div>
@@ -55,42 +48,52 @@
 
                     <div class="divInputPlusLabel">
                       <label for="">Correo Electronico</label>
-                      <input class="inputSignup" type="text" name="" id="" placeholder="Tu correo">
+                      <input class="inputSignup" type="text" name="email" id="" placeholder="Tu correo" required> 
                   </div> 
 
 
                   <div class="divInputPlusLabel">
                       <label for="">DNI</label >
-                      <input class="inputSignup" type="text" name="" id="" placeholder="Tu DNI">
+                      <input class="inputSignup" type="text" name="DNI" id="" placeholder="Tu DNI" required>
                   </div>
-
             </div>
-
-            
+   
             <div class="div2InputsContainer">
 
                       <div class="divInputPlusLabel">
                         <label for="">Contraseña</label>
-                        <input class="inputSignup" type="password" name="" id="" placeholder="Tu contraseña">
+                        <input class="inputSignup" type="password" name="password" id="" placeholder="Tu contraseña" required>
                     </div> 
 
 
                     <div class="divInputPlusLabel">
                         <label for="">Confirmar contraseña</label >
-                        <input class="inputSignup" type="password" name="" id="" placeholder="Tu contraseña">
+                        <input class="inputSignup" type="password" name="" id="" placeholder="Repite contraseña">
                     </div>
 
              </div>
              <div class="div2InputsContainer">
 
-              <select name="" id="">
-                <option value="value1" selected>Quiero solicitar trabajo</option>
-                <option value="value2" >Quiero ofrecer trabajo</option>
-               
-              </select>
+              <div class="divInputPlusLabel">
+                <label for="">¿Que busca?</label >
+                <select name="tipo" id="">
+                  <option value="solicitante" selected>Quiero solicitar trabajo</option>
+                  <option value="ofertante" >Quiero ofrecer trabajo</option>
+                 
+                </select>
+            </div> 
 
+
+            <div class="divInputPlusLabel">
+              <label for="Fecha">Fecha de nacimiento</label>
+              <input type="date" id="date" name="trip-start"
+                     value="2018-07-22"
+                     min="2018-01-01" max="2018-12-31">
+              
+            </div>
 
      </div>
+            
       
               <div class="div2InputsContainer" id="checkboxdiv">
                         <input type="checkbox" id="checkbox" required>  
@@ -98,11 +101,11 @@
                   
               </div> 
 
-              <button id="buttonRegister">Crear cuenta</button>
+              <button id="buttonRegister" type="submit">Crear cuenta</button>
 
               <div class="div2InputsContainer" id="alreadyRegistered">
                 ¿Ya tienes una cuenta? 
-              <a href="" id="Logueate"> Logueate</a>
+              <a href="/signin" id="Logueate"> Logueate</a>
           
       </div> 
               

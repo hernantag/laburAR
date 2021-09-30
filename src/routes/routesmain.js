@@ -20,6 +20,10 @@ router.post('/signup', passport.authenticate('local-signup',{
 }))
 
 
+
+
+
+
 router.get('/signin', (req,res,next) =>{
     res.render('signin.ejs')
 })
@@ -40,6 +44,7 @@ function isAuthenticated(req,res,next){
         res.redirect('/')
     }
 }
+
 router.post('/signin', passport.authenticate('local-signin',{
     successRedirect:'/',
     failureRedirect:'/signin',

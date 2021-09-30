@@ -152,20 +152,26 @@ a:hover{
     margin-top: 3%;
     display: flex;
     justify-content: space-between;
-    height: 120vh;
+    height: 140vh;
     
 }
-
 .divBodySignup-Left{
-    font-family: 'Poppins';
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding:12% 12% 12% 12% ;
+   
     width: 30%;
-    background: url(/img/indeximage22.jpg) no-repeat center;
+    background: url(/img/SigninImage.jpg) no-repeat center;
     background-size: cover;
     background-position: 54% 4%;
     height: 100%;
+    
+}
+.divBodySignin-Left{
+    
+    width: 30%;
+    background: url(/img/SigninImage.jpg) no-repeat center;
+    background-size: cover;
+    background-position: 50% 4%;
+    height: 100%;
+    
     
 }
 .divBodySignup-Right{
@@ -288,9 +294,24 @@ a:hover{
     margin-bottom: 4%;
     width: 45%;
 }
-
+.divInputPlusLabel select{
+    margin-top: 0%;
+    padding: 5.4%;
+}
 .inputSignup:focus{
     border-right: none ;
     outline: none;
     
+}
+
+#date{ 
+    background-color: #EEEEEE;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px 0px #00ADB5 ;
+    padding: 12px 22px;
+    border: none;
+    border-bottom: solid 2px #00ADB5;
+    border-right: solid 1px #00ADB5 ;
+
 }
