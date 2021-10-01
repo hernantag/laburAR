@@ -10,4 +10,8 @@ router.get('/inicio/Solicitante', loggedIn,isSolicitante,  (req,res,next) =>{
     res.render('inicioSolicer.ejs')
 })
 
+
+
+
+
 module.exports = router;
