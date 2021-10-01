@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/inside.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:wght@300&family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">    <script src="https://kit.fontawesome.com/be85762cea.js" crossorigin="anonymous"></script>
+
+    <title>Inicio</title>
+</head>
+
+
+<body>
+    <header>
+        <%- include ('./partials/header.ejs') %>
+            </header>
+            <div class="divBody-UnderHeader">
+
+                <div class="divBody-UnderHeader-Inner">
+                    
+                    <div class="divBody-UnderHeader-Inner-left">
+
+
+                        <div class="divIconAndTittleLeftHeader">
+                                    <div class="divIconContainer">
+                                        <i class="fas fa-file-alt iconLeftHeaderJobs"></i>
+                                    </div>
+                                    <div class="divTextContainer">
+                                        <a href="">Mis ofertas publicadas</a>
+                                    </div>
+                            
+                        </div>
+
+                        <div class="divIconAndTittleLeftHeader">
+                            
+                                    <div class="divIconContainer">
+                                        <i class="fas fa-user-plus iconLeftHeaderJobs"></i>
+                                    </div>
+                                    <div class="divTextContainer" id="postulantes">
+                                        <a href="">Postulantes</a>
+                                    </div>
+
+                        </div>
+                        
+
+
+                    </div>
+
+                    <div class="divBody-UnderHeader-Inner-left" id="addOffer">
+                        
+                                <div class="divIconAndTittleLeftHeader">
+                                    
+                                            <div class="divIconContainer">
+                                                <i class="fas fa-pen" id="addOfferIcon"></i>
+                                            </div>
+                                            <div class="divTextContainer">
+                                                <a href="">¡Agrega una nueva oferta de trabajo!</a>
+                                            </div>
+
+                                 </div>
+                    </div>
+
+
+
+                
+                    <div class="divBody-UnderHeader-Inner-right">
+                            <div class="dUiR-Header">
+                                <div class="dUiR-Header-Tittle">
+                                    <p>Ultimas solicitudes de empleo</p>
+                                </div>
+                                <div class="dUiR-Header-subTittle">
+                                    La cantidad de ofertas es: <%= ofertas.length  %> 
+                                </div>
+                            </div>
+                             
+
+                                        <% if (ofertas.length > 0) { %>
+                                            <% ofertas.forEach(element => { %>
+                                                <div class="divBody-UnderHeader-Inner-rightOffer">
+                
+                                                        <div class="dUiR-ImageContainer">
+                
+                                                        </div>
+                                                        <div class="dUiR-TextContainer">
+                
+                                                            <div class="dUiR-TextContainer-Tittle">
+                                                                <a href=""></a>
+                                                                <p><%= element.Titulo %> </p>
+                                                            </div>
+                                                            <div class="dUiR-TextContainer-Info">
+                                                                <p><%= element.Descripcion_L%></p>
+                                                            </div>
+                
+                                                        </div>
+                
+                                                  </div>
+                                                  <% }) %>  
+                                                  <% } else { %>
+
+                                                    <div class="divNoSolicitudes">
+                                                    <p>No hay solicitudes disponibles :(</p>
+                                                    </div>
+                                                    <div class="divNoSolicitudes">
+                                                        <i class="fas fa-sad-cry" id="iconNoSolicitudes"></i>
+                                                        </div>
+                                                    
+                                                    
+                                                    <% } %>
+                                                   
+                                        
+
+                               
+
+                    </div>
+
+
+                </div>
+
+            </div>
+             <!-- FOOTER -->
+             <%- include ('./partials/footer.ejs') %>
+        </body>
+        
+
+        </html>
