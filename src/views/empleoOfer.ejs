@@ -31,7 +31,8 @@
                         <div class="divBUHIL-header">
                             <p>¡Bienvenido <%= nombre %>!</p>
                         </div>
-                        <div class="divIconAndTittleLeftHeader">
+                        <div class="divBUHIL-header-Line"></div>
+                        <div id="firstTittle" class="divIconAndTittleLeftHeader">
                                     <div class="divIconContainer">
                                         <i class="fas fa-file-alt iconLeftHeaderJobs"></i>
                                     </div>
@@ -56,13 +57,13 @@
 
                     <div class="divBody-UnderHeader-Inner-left" id="addOffer">
                         
-                                <div class="divIconAndTittleLeftHeader">
+                                <div class="divIconAndTittleLeftHeaderBottom">
                                     
-                                            <div class="divIconContainer">
+                                            <div class="divIconContainerBottom">
                                                 <i class="fas fa-pen" id="addOfferIcon"></i>
                                             </div>
                                             <div class="divTextContainer">
-                                                <a href="">¡Agrega una nueva oferta de trabajo!</a>
+                                                <a href="">¡Agrega una nueva oferta!</a>
                                             </div>
 
                                  </div>
@@ -77,7 +78,7 @@
                                     <p>Ultimas solicitudes de empleo</p>
                                 </div>
                                 <div class="dUiR-Header-subTittle">
-                                    Mostrando <%= solicitudes.length   %> solicitudes de <%= total  %>
+                                    Mostrando <%= solicitudes.length   %> solicitudes de <%= total  %> en total
                                 </div>
                             </div>
                              
@@ -148,10 +149,22 @@
                     </li>
                     <% } %>
 
+                    <% if (solicitudes.length != 5) { %>
+                        <li class="page-item">
+                            <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " style=
+                            
+                                "pointer-events: none";>Siguiente</a>
+                        </li>
+        
+                    <% } else { %>
+                        
+                        <li class="page-item">
+                            <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " >Siguiente</a>
+                        </li>
+                        <% } %>
 
-                    <li class="page-item">
-                        <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> ">Siguiente</a>
-                    </li>
+
+                    
              
               </ul>
            </div>

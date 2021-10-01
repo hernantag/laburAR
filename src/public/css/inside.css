@@ -115,6 +115,7 @@ ul{
 }
 
 .divBody-UnderHeader-Inner{
+    
     margin: auto;
     height: 100vh;
     width: 95%;
@@ -122,11 +123,11 @@ ul{
 }
 
 .divBody-UnderHeader-Inner-left{
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-weight: 300;
     position: fixed;
     display: flex;
-    margin-top: 2%;
+    margin-top: 0%;
     /* padding: 4% 2% 4% 2%; */
     /* border-radius: 15px; */
     border: 1px solid rgb(216, 216, 216);
@@ -144,20 +145,61 @@ ul{
     padding-top: 4%;
     font-size: 1.4rem;
 }
+.divBUHIL-header-Line{
+    margin-top: -5%;
+    margin-left: 25%;
+    display: flex;
+    justify-content: center;
+    height: 0.5%;
+    width: 50%;
+    border-bottom: 1px solid grey;
+}
+#firstTittle{
+    margin-top: 10%;
+}
 
 .divIconAndTittleLeftHeader{
     
     display: flex;
     justify-content: center;
+    margin-left: 4%;
     margin-bottom: 7%;
     
 }
+.divIconAndTittleLeftHeaderBottom{
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+    color: #393E46;
+    
+}
+.divIconAndTittleLeftHeaderBottom a{
+    font-size: 1.1rem;
+    color: #393E46;
+    text-decoration:none
+}
+
+
+.divIconAndTittleLeftHeaderBottom a:hover{
+   
+    text-decoration: underline #393E46 ;
+}
+
+
 .divIconContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
     width: 10%;
+}
+
+.divIconContainerBottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
 }
 .divTextContainer{
     height: 100%;
@@ -169,6 +211,7 @@ ul{
     text-decoration: none;
     color: #393E46;
 }
+
 
 .iconLeftHeaderJobs{
     
@@ -195,7 +238,7 @@ ul{
     font-weight: 300;
     position: relative;
     right: -28%;
-    top: 4.2%;
+    top: 0%;
     display: flex;
     margin-top: 2%;
     /* padding: 4% 2% 4% 2%; */
