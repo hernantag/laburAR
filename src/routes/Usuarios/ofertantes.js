@@ -13,13 +13,37 @@ router.get('/inicio/Ofertante', loggedIn,isOfertante,  (req,res,next) =>{
 })
 
 router.get('/Ofertante/Empleo', loggedIn,isOfertante, async (req,res,next) =>{
-    let ofertas = await pool.query("SELECT * FROM oferta");
-    console.log(ofertas)
-    res.render('empleoOfer.ejs',{
-        ofertas
-    })
+    res.redirect('/Ofertante/Empleo/1')
 
 })
+
+
+router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next) =>{
+
+            if (req.params.page < 1){
+                      
+                      
+              res.redirect('/Ofertante/Empleo')
+            next()
+            }
+          
+          let page = ((req.params.page - 1 )*5)
+          let solicitudes = await pool.query("SELECT * FROM solicitud LIMIT ?, ?;",[page,5]);
+          let nombre = req.user.nombre
+          let pagina = (req.params.page)
+          let total = await pool.query("SELECT * FROM solicitud");
+          total = total.length
+          console.log(pagina)
+
+          res.render('empleoOfer.ejs',{
+            solicitudes,nombre,pagina,total
+
+          })
+
+  
+          })
+
+
 
 /* router.get("/cliente", async (req, res) => {
     let mensaje = req.flash("mensaje");

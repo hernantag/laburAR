@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:wght@300&family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">    <script src="https://kit.fontawesome.com/be85762cea.js" crossorigin="anonymous"></script>
 
-    <title>Inicio</title>
+    <title>Empleos</title>
 </head>
 
 
@@ -28,6 +28,9 @@
                     <div class="divBody-UnderHeader-Inner-left">
 
 
+                        <div class="divBUHIL-header">
+                            <p>¡Bienvenido <%= nombre %>!</p>
+                        </div>
                         <div class="divIconAndTittleLeftHeader">
                                     <div class="divIconContainer">
                                         <i class="fas fa-file-alt iconLeftHeaderJobs"></i>
@@ -47,9 +50,7 @@
                                         <a href="">Postulantes</a>
                                     </div>
 
-                        </div>
-                        
-
+                        </div>                      
 
                     </div>
 
@@ -76,13 +77,13 @@
                                     <p>Ultimas solicitudes de empleo</p>
                                 </div>
                                 <div class="dUiR-Header-subTittle">
-                                    La cantidad de ofertas es: <%= ofertas.length  %> 
+                                    Mostrando <%= solicitudes.length   %> solicitudes de <%= total  %>
                                 </div>
                             </div>
                              
 
-                                        <% if (ofertas.length > 0) { %>
-                                            <% ofertas.forEach(element => { %>
+                                        <% if (solicitudes.length > 0) { %>
+                                            <% solicitudes.forEach(element => { %>
                                                 <div class="divBody-UnderHeader-Inner-rightOffer">
                 
                                                         <div class="dUiR-ImageContainer">
@@ -124,6 +125,36 @@
                 </div>
 
             </div>
+                
+           <div class="divPagination">
+
+
+            <ul class="pagination">
+
+
+                
+                <% if (pagina != 1) { %>
+                    <li class="page-item">
+                        <a class="PaginationItems" href="/Ofertante/Empleo/<%= ((pagina)-1) %> ">Anterior</a>
+                    </li>
+    
+                <% } else { %>
+                    <li class="page-item">
+                        <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= ((pagina)-1) %> " style=
+                            
+                             "pointer-events: none";
+                           
+                            >Anterior</a>
+                    </li>
+                    <% } %>
+
+
+                    <li class="page-item">
+                        <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> ">Siguiente</a>
+                    </li>
+             
+              </ul>
+           </div>
              <!-- FOOTER -->
              <%- include ('./partials/footer.ejs') %>
         </body>
