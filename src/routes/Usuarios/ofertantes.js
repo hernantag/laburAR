@@ -21,11 +21,11 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
 
             if (req.params.page < 1){
                       
-                      
+              
               res.redirect('/Ofertante/Empleo')
             next()
             }
-          
+          let rubros = await pool.query("SELECT * FROM solicitud");
           let page = ((req.params.page - 1 )*5)
           let solicitudes = await pool.query("SELECT * FROM solicitud LIMIT ?, ?;",[page,5]);
           let nombre = req.user.nombre
@@ -34,7 +34,7 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
           total = total.length
           let filtrando = 0
           res.render('empleoOfer.ejs',{
-            solicitudes,nombre,pagina,total,filtrando
+            solicitudes,nombre,pagina,total,filtrando, rubros
 
           })
 
