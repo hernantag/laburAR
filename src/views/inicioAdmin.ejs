@@ -52,9 +52,24 @@
             <% }) %>
         </tbody>
       </table>
-      <button  data-bs-toggle="modal" data-bs-target="#agregarusuario">Agregar Usuario</button>
-      <button>Eliminar Usuario</button>
-      <br>
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+            <button  data-bs-toggle="modal" data-bs-target="#agregarusuario">Agregar Usuario</button>
+          </div>
+          <div class="col">
+              <form action="/admin/eliminar/usuario" method="POST">
+                <select class="form-select" name="id" aria-label="">
+                  <option selected value="">Seleccionar Usuario</option>
+                  <% usuarios.forEach(element => { %>
+                    <option value="<%= element.idusuario  %> "><%= element.idusuario  %> </option>
+                  <% }) %>
+                </select>
+                <button type="submit" class="btn btn-primary">Eliminar Usuario</button>
+            </form>
+          </div>
+        </div>
+      </div>
       <h5>
         Tabla Rubros
     </h5>
@@ -77,8 +92,24 @@
             <% }) %>
         </tbody>
       </table>
-      <button>Agregar Rubro</button>
-      <button>Eliminar Rubro</button>
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+            <button  data-bs-toggle="modal" data-bs-target="#agregarrubro">Agregar Rubro</button>
+          </div>
+          <div class="col">
+              <form action="/admin/eliminar/rubro" method="POST">
+                <select class="form-select" name="id" aria-label="">
+                  <option selected value="">Seleccionar Rubro</option>
+                  <% rubros.forEach(element => { %>
+                    <option value="<%= element.ID_Rubro  %> "><%= element.ID_Rubro  %> </option>
+                  <% }) %>
+                </select>
+                <button type="submit" class="btn btn-primary">Eliminar Rubro</button>
+            </form>
+          </div>
+        </div>
+      </div>
       <br>
       <h5>
         Tabla SubRubros
@@ -105,31 +136,26 @@
             <% }) %>
         </tbody>
       </table>
-      <button>Agregar SubRubro</button>
-      <button>Eliminar SubRubro</button>
-
-      <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ASD
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+            <button data-bs-toggle="modal" data-bs-target="#agregarsubrubro">Agregar SubRubro</button>
+          </div>
+          <div class="col">
+              <form action="/admin/eliminar/subrubro" method="POST">
+                <select class="form-select" name="id" aria-label="">
+                  <option selected value="">Seleccionar SubRubro</option>
+                  <% subrubros.forEach(element => { %>
+                    <option value="<%= element.ID_SubRubro  %> "><%= element.ID_SubRubro  %> </option>
+                  <% }) %>
+                </select>
+                <button type="submit" class="btn btn-primary">Eliminar SubRubro</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+      
+
   <!-- MODALES -->
   <div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -173,7 +199,7 @@
       
                 <div class="divInputPlusLabel">
                   <label for="">Contraseña</label>
-                  <input class="inputSignup" type="password" name="password" id=""  required>
+                  <input class="inputSignup" type="password" name="contraseña" id=""  required>
                 </div>
       
               </div>
@@ -181,13 +207,13 @@
       
                 <div class="divInputPlusLabel">
                   <label for="">Rol</label>
-                  <!--<select name="tipo" id="">
+                  <select name="tipo" id="">
                     <option value="solicitante" selected>Solicitante</option>
                     <option value="ofertante">Ofertante</option>
                     <option value="admin">Admin</option>
       
-                  </select>-->
-                  <input type="text" name="tipo" value="admin">
+                  </select>
+                  
                 </div>
       
                 <% const today=new Date(); %>
@@ -204,25 +230,60 @@
               </div>
 
           </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal fade" id="agregarrubro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Rubro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-footer">
+        <div class="modal-body">
+          <form action="/admin/agregar/rubro" method="POST">
+            <div class="mb-3">
+              <label for="" class="form-label">Nombre</label>
+              <input type="text" name="Nombre" class="form-control" id="">
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Descripcion</label>
+              <input type="text" name="Descripcion" class="form-control" id="">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Rubro</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="agregarrol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="agregarsubrubro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Rubro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ASD
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <form action="/admin/agregar/subrubro" method="POST">
+            <div class="mb-3">
+              <label for="" class="form-label">Rubro</label>
+              <select name="ID_Rubro" id="">
+                <% rubros.forEach(element => { %>
+                  <option selected value="<%= element.ID_Rubro  %> "> <%= element.Nombre  %> </option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Nombre</label>
+              <input type="text" name="Nombre" class="form-control" id="">
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Descripcion</label>
+              <input type="text" name="Descripcion" class="form-control" id="">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar SubRubro</button>
+          </form>
         </div>
       </div>
     </div>
