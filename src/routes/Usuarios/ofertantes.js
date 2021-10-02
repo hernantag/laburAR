@@ -17,7 +17,7 @@ router.get('/Ofertante/Empleo', loggedIn,isOfertante, async (req,res,next) =>{
 })
 
 
-router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next) =>{
+          router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next) =>{
 
             if (req.params.page < 1){
                       
@@ -25,7 +25,12 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
               res.redirect('/Ofertante/Empleo')
             next()
             }
+<<<<<<< HEAD
           let rubros = await pool.query("SELECT * FROM solicitud");
+=======
+          
+
+>>>>>>> 6389361654425c226659424ec3358b2a397c9c3a
           let page = ((req.params.page - 1 )*5)
           let solicitudes = await pool.query("SELECT * FROM solicitud LIMIT ?, ?;",[page,5]);
           let nombre = req.user.nombre
@@ -33,8 +38,19 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
           let total = await pool.query("SELECT * FROM solicitud");
           total = total.length
           let filtrando = 0
+          
+
+
+          let rubros = await(pool.query("SELECT Nombre FROM rubro"))
+          let rubroSeleccionado = 'vacio'
+          console.log(rubros)
+
           res.render('empleoOfer.ejs',{
+<<<<<<< HEAD
             solicitudes,nombre,pagina,total,filtrando, rubros
+=======
+            solicitudes,nombre,pagina,total,filtrando,rubros,rubroSeleccionado
+>>>>>>> 6389361654425c226659424ec3358b2a397c9c3a
 
           })
 
@@ -64,9 +80,15 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
             //si viene con filtros
             console.log(filtros)
               if (filtros.Rubro != 'vacio'){
-                  consulta = consulta + ' Descripcion_C = ' + comilla + filtros.Rubro + comilla
+
+                  consulta = consulta + ' ID_Rubro = ' + comilla + filtros.Rubro + comilla
                   console.log(consulta)
                   counterAND = (counterAND)-(-1)
+
+                  rubroSeleccionado = filtros.Rubro
+                  
+
+
               }
                 //para agregar and
 
@@ -92,15 +114,17 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
                         console.log(consulta)
                       }
                       counterAND = (counterAND)-(-1)
+                     
+
              }
 
               if (filtros.Experiencia != 'vacio'){
                         
                       if (counterAND != 0){
-                        consulta = consulta + ' AND Descripcion_l = ' + comilla + filtros.Experiencia + comilla
+                        consulta = consulta + ' AND Nivel = ' + comilla + filtros.Experiencia + comilla
                         console.log(consulta)
                       }else{
-                        consulta = consulta + ' Descripcion_L = ' + comilla + filtros.Experiencia + comilla
+                        consulta = consulta + ' Nivel = ' + comilla + filtros.Experiencia + comilla
                         console.log(consulta)
                       }
                       counterAND = (counterAND)-(-1)
@@ -114,20 +138,24 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
                       let pagina = req.params.page
                       let filtrando = 1
                       
-                      console.log(consultaconlimit,[page,5])
-                      console.log(solicitudes)
-                      console.log(page)
-                      
+
+                     
+
                       let total = await pool.query(consulta);
                       total = total.length
+
+                      
+
+
                      
                       res.render('empleoOfer.ejs',{
-                        solicitudes,nombre,pagina,total,consulta,filtrando,consultaconlimit
+                        solicitudes,nombre,pagina,total,consulta,filtrando,consultaconlimit,rubroSeleccionado
             
                       })
-          
+                      
       
-                  }})
+                  }
+                })
 
 
 
