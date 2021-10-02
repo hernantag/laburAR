@@ -33,9 +33,9 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
           let pagina = (req.params.page)
           let total = await pool.query("SELECT * FROM solicitud");
           total = total.length
-
+          let filtrando = 0
           res.render('empleoOfer.ejs',{
-            solicitudes,nombre,pagina,total
+            solicitudes,nombre,pagina,total,filtrando
 
           })
 
@@ -43,14 +43,12 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
           })
 
 
-          router.post("/Ofertante/Empleo/Filter",loggedIn, isOfertante, async (req, res) => {
+          router.post("/Ofertante/Empleo/Filter/:page",loggedIn, isOfertante, async (req, res) => {
 
             
             let filtros = req.body;
             console.log(filtros)
-           
-          /*   let solicitud = await pool.query("SELECT * FROM vehiculo WHERE ID_Solicitud IS NOT NULL") */
-            
+                       
 
             let consulta = 'SELECT * FROM solicitud WHERE '
             console.log(consulta)
@@ -65,29 +63,111 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req,res,next
           }
             else {
             //si viene con filtros
+            console.log(filtros)
               if (filtros.Rubro != 'vacio'){
-                  consulta = consulta + ' Rubro = ' + comilla + filtros.Rubro + comilla
+                  consulta = consulta + ' Descripcion_C = ' + comilla + filtros.Rubro + comilla
                   console.log(consulta)
                   counterAND = (counterAND)-(-1)
               }
                 //para agregar and
+
               if (filtros.Fecha != 'vacio'){
                 
                         if (counterAND != 0){
-                          consulta = consulta + ' AND Descripcion_L = ' + comilla + filtros.Fecha + comilla
+                          consulta = consulta + ' AND fecha_i = ' + comilla + filtros.Fecha + comilla
                           console.log(consulta)
                         }else{
-                          consulta = consulta + ' Descripcion_L = ' + comilla + filtros.Fecha + comilla
+                          consulta = consulta + ' fecha_i = ' + comilla + filtros.Fecha + comilla
                           console.log(consulta)
                         }
                         counterAND = (counterAND)-(-1)
               }
-                  
-                  
-              res.redirect('/Ofertante/Empleo/')
-    
- 
-            }})
+
+              if (filtros.SubRubro != 'vacio'){
+                      
+                      if (counterAND != 0){
+                        consulta = consulta + ' AND ID_SubRubro = ' + comilla + filtros.SubRubro + comilla
+                        console.log(consulta)
+                      }else{
+                        consulta = consulta + ' ID_SubRubro = ' + comilla + filtros.SubRubro + comilla
+                        console.log(consulta)
+                      }
+                      counterAND = (counterAND)-(-1)
+             }
+
+              if (filtros.Experiencia != 'vacio'){
+                        
+                      if (counterAND != 0){
+                        consulta = consulta + ' AND Descripcion_l = ' + comilla + filtros.Experiencia + comilla
+                        console.log(consulta)
+                      }else{
+                        consulta = consulta + ' Descripcion_L = ' + comilla + filtros.Experiencia + comilla
+                        console.log(consulta)
+                      }
+                      counterAND = (counterAND)-(-1)
+                      }
+                          
+                      let consultaconlimit = consulta + ' LIMIT ?,?' 
+
+                      let page = ((req.params.page - 1 )*5)
+                      let solicitudes = await pool.query(consultaconlimit,[page,5])        
+                      let nombre = req.body.nombre
+                      let pagina = req.params.page
+                      let filtrando = 1
+                      
+                      console.log(consultaconlimit,[page,5])
+                      console.log(solicitudes)
+                      console.log(page)
+                      
+                      let total = await pool.query(consulta);
+                      total = total.length
+                     
+                      res.render('empleoOfer.ejs',{
+                        solicitudes,nombre,pagina,total,consulta,filtrando,consultaconlimit
+            
+                      })
+          
+      
+                  }})
+
+
+
+
+
+
+
+
+
+
+            router.get('/Ofertante/Empleo/Filter/:page/:query', loggedIn,isOfertante, async (req,res,next) =>{
+
+              let consulta = req.params.query
+              let consultaconlimit = consulta + ' LIMIT ?,?' 
+
+              if (req.params.page < 1){
+                      
+                      
+                res.redirect('/Ofertante/Empleo/1')
+              next()
+              }
+            
+            let page = ((req.params.page - 1 )*5)
+
+
+            let solicitudes = await pool.query(consultaconlimit,[page,5]);
+            let nombre = req.user.nombre
+            let pagina = (req.params.page)
+            let total = await pool.query(consulta);
+            total = total.length
+            let filtrando = 1
+
+            res.render('empleoOfer.ejs',{
+              solicitudes,nombre,pagina,total,filtrando,consulta
+  
+            })
+          
+          })
+
 
           
             
