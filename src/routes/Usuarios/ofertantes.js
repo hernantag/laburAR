@@ -1,5 +1,4 @@
 const express = require('express')
-const passport = require('passport')
 const router = express.Router()
 const pool = require("../../database/database");
 const {loggedIn,isOfertante} = require('../../passport/helpers')
@@ -22,7 +21,7 @@ router.get('/Ofertante/Empleo', loggedIn,isOfertante, async (req,res,next) =>{
 
             if (req.params.page < 1){
                       
-                      
+              
               res.redirect('/Ofertante/Empleo')
             next()
             }
