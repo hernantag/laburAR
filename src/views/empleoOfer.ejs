@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:wght@300&family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">    <script src="https://kit.fontawesome.com/be85762cea.js" crossorigin="anonymous"></script>
 
-    <title>Inicio</title>
+    <title>Empleos</title>
 </head>
 
 
@@ -21,14 +21,74 @@
     <header>
         <%- include ('./partials/header.ejs') %>
             </header>
+
+
+
             <div class="divBody-UnderHeader">
+
+                <form class="divBody-Filter" action="/Ofertante/Empleo/Filter/1" method="POST">
+                            
+
+                                <div class="filterItem">
+                                    <select name="Fecha" id="">
+                                        <option value="vacio" hidden selected >Fecha de publicacion</option>
+                                        <option value="valor1">ELVALOR</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="Experiencia" id="">
+                                        <option value="vacio" selected hidden>Nivel de Experiencia</option>
+                                        <option value="1">Exp 1</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="Rubro" id="">
+                                        <option value="vacio" hidden selected>Rubro</option>
+                                        <option value="1">rubro 1</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="SubRubro" id="" >
+                                        <option value="vacio" hidden selected >SubRubro</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem" >
+                                    <button type="submit" id="filterButton">
+                                        FILTRAR
+                                    </button>
+                                </div>
+ </form>
+                            
+            
+
 
                 <div class="divBody-UnderHeader-Inner">
                     
                     <div class="divBody-UnderHeader-Inner-left">
 
 
-                        <div class="divIconAndTittleLeftHeader">
+                        <div class="divBUHIL-header">
+                            <p>¡Bienvenido <%= nombre %>!</p>
+                        </div>
+                        <div class="divBUHIL-header-Line"></div>
+                        <div id="firstTittle" class="divIconAndTittleLeftHeader">
                                     <div class="divIconContainer">
                                         <i class="fas fa-file-alt iconLeftHeaderJobs"></i>
                                     </div>
@@ -47,21 +107,19 @@
                                         <a href="">Postulantes</a>
                                     </div>
 
-                        </div>
-                        
-
+                        </div>                      
 
                     </div>
 
                     <div class="divBody-UnderHeader-Inner-left" id="addOffer">
                         
-                                <div class="divIconAndTittleLeftHeader">
+                                <div class="divIconAndTittleLeftHeaderBottom">
                                     
-                                            <div class="divIconContainer">
+                                            <div class="divIconContainerBottom">
                                                 <i class="fas fa-pen" id="addOfferIcon"></i>
                                             </div>
                                             <div class="divTextContainer">
-                                                <a href="">¡Agrega una nueva oferta de trabajo!</a>
+                                                <a href="">¡Agrega una nueva oferta!</a>
                                             </div>
 
                                  </div>
@@ -76,13 +134,14 @@
                                     <p>Ultimas solicitudes de empleo</p>
                                 </div>
                                 <div class="dUiR-Header-subTittle">
-                                    La cantidad de ofertas es: <%= ofertas.length  %> 
+                                    Mostrando <%= solicitudes.length   %> solicitudes de <%= total  %> en total
+                                    
                                 </div>
                             </div>
                              
 
-                                        <% if (ofertas.length > 0) { %>
-                                            <% ofertas.forEach(element => { %>
+                                        <% if (solicitudes.length > 0) { %>
+                                            <% solicitudes.forEach(element => { %>
                                                 <div class="divBody-UnderHeader-Inner-rightOffer">
                 
                                                         <div class="dUiR-ImageContainer">
@@ -124,6 +183,95 @@
                 </div>
 
             </div>
+                
+           <div class="divPagination">
+
+
+            <ul class="pagination">
+
+
+
+
+                    <%= console.log(filtrando) %> 
+
+                   <% if (filtrando == 0) { %>
+                    
+                              <!-- SI ES  -->
+                
+                <% if (pagina != 1) { %>
+                    <li class="page-item">
+                        <a class="PaginationItems" href="/Ofertante/Empleo/<%= ((pagina)-1) %> ">Anterior</a>
+                    </li>
+                    
+                <% } else { %>
+                    <li class="page-item">
+                        <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= ((pagina)-1) %> " style=
+                            
+                             "pointer-events: none";
+                           
+                            >Anterior</a>
+                            
+                    </li>
+                    <% } %>
+
+                    <% if (solicitudes.length != 5) { %>
+                        <li class="page-item">
+                            <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " style=
+                            
+                                "pointer-events: none";>Siguiente</a>
+                        </li>
+        
+                    <% } else { %>
+                        
+                        <li class="page-item">
+                            <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " >Siguiente</a>
+                        </li>
+                        <% } %>
+
+                   
+
+                    <% } else { %>
+                        <% if (pagina != 1) { %>
+                            <li class="page-item">
+                                <a class="PaginationItems" href="/Ofertante/Empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
+                            </li>
+                            
+                        <% } else { %>
+                            <li class="page-item">
+                                <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= ((pagina)-1) %>/<%= consulta %>  " style=
+                                    
+                                     "pointer-events: none";
+                                   
+                                    >Anterior</a>
+                                    
+                            </li>
+                            <% } %>
+        
+                            <% if (solicitudes.length != 5) { %>
+                                <li class="page-item">
+                                    <a class="PaginationItems" id="nextpage" href="<%= (pagina)-(-1) %>/<%= consulta %>" style=
+                                    
+                                        "pointer-events: none";>Siguiente</a>
+                                </li>
+                
+                            <% } else { %>
+                                
+                                <li class="page-item">
+                                    <a class="PaginationItems" id="nextpage" href="<%= (pagina)-(-1) %>/<%= consulta %> " >Siguiente</a>
+                                </li>
+                                <% } %>
+                    <% } %>
+
+
+
+
+              
+
+
+                    
+             
+              </ul>
+           </div>
              <!-- FOOTER -->
              <%- include ('./partials/footer.ejs') %>
         </body>
