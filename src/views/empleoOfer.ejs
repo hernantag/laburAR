@@ -21,7 +21,63 @@
     <header>
         <%- include ('./partials/header.ejs') %>
             </header>
+
+
+
             <div class="divBody-UnderHeader">
+
+                <form class="divBody-Filter" action="/Ofertante/Empleo/Filter" method="POST">
+                            
+
+                                <div class="filterItem">
+                                    <select name="Fecha" id="">
+                                        <option value="vacio" disabled selected hidden>Fecha de publicacion</option>
+                                        <option value="valor1">ELVALOR</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="Experiencia" id="">
+                                        <option value="vacio">Nivel de Experiencia</option>
+                                        <option value="1">Exp 1</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="Rubro" id="">
+                                        <option value="vacio" disabled selected hidden>Rubro</option>
+                                        <option value="1">rubro 1</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem">
+                                    <select name="SubRubro" id="" >
+                                        <option value="vacio" disabled selected hidden>SubRubro</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                        <option value="">Fecha publicacion</option>
+                                    </select>
+                                    <i></i>   
+                                </div>
+
+                                <div class="filterItem" >
+                                    <button type="submit" id="filterButton">
+                                        FILTRAR
+                                    </button>
+                                </div>
+ </form>
+                            
+            
+
 
                 <div class="divBody-UnderHeader-Inner">
                     
