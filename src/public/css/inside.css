@@ -144,7 +144,10 @@ ul{
 
 .filterItem{
     
-    
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 0.9rem;
+    font-style: italic;
     width: 17%;
     height: 80%;
     position: relative;

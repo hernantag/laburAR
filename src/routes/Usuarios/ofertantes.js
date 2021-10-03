@@ -246,6 +246,18 @@ router.get('/Ofertante/Empleo', loggedIn,isOfertante, async (req,res,next) =>{
 
 
           
+          router.get('/empleo/agregarOferta',loggedIn,isOfertante, async (req,res,next) => {
+
+            res.render('agregarOfer',)
+          })
+
+          
+
+
+
+
+
+
             
         
 

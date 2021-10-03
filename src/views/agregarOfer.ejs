@@ -5,44 +5,121 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/inside.css">
+    <link rel="stylesheet" href="/css/add.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;1,300&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <title>Inicio</title>
 </head> 
 <body>
-        <form action="">
-            <div class="mb-3">
-                <label class="form-label">Titulo</label>
-                <input type="text" class="form-control" id="" aria-describedby="">
+    <header>
+        <%- include ('./partials/header.ejs') %>
+            </header>
+            <div class="divUnderHeader">
+
+                <div class="divUnderHeaderInner">
+                    <div class="divUnderHeaderInnerColored">
+
+                        <div class="divForm">
+                            <div class="divformLeft">
+
+                            </div>
+
+                                    <div class="divFormright">
+                                <div class="divFormTittle">
+                                    <p style="margin-bottom: 0; margin-top: 4%;">¡Agrega tu oferta!</p>
+                                </div>
+
+                                <div class="divFormBody">
+
+                                    <div class="divformInputContainer" id="tittleInput">
+                                        <p>Titulo</p>
+                                        <div class="inputSignup">
+
+                                            <input type="text" name="" id="" class="">
+                                            
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="divformInputContainer" id="rubrosInput">
+
+                                        
+                                        <div class="divformInputContainerhalf">
+                                            <p >Rubro</p>
+                                            <div class="inputSignup" >
     
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Descripcion</label>
-                <input type="text" class="form-control" id="" aria-describedby="">
+                                                <select name="" id="">
+                                                    <option value="">asd</option>
+                                                </select>
+                                                
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="divformInputContainerhalf">
+                                            <p >Subrubro</p>
+                                            <div class="inputSignup" >
     
-            </div>
-            <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione un SubRubro</option>
-                    <% subrubros.forEach(element => { %>
-                        <option value="<%= element.ID_SubRubro %> "><%= element.Nombre %> </option>
-                    <% }) %>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="Practicas">Practicas</option>
-                    <option value="Junior">Junior</option>
-                    <option value="SemiJunior">Practicas</option>
-                    <option value="Practicas">Practicas</option>
-                </select>
-                
-            </div>
+                                                <select name="" id="">
+                                                    <option value="">asd</option>
+                                                </select>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                       
+                                    </div>
+
+                                    
+
+                                        <div class="divformInputContainer" id="levelinput" style="margin-top: 4%;">
+                                            <p>Nivel de experiencia</p>
+                                            <div class="inputSignup" >
+    
+                                                <select name="" id="nivelExp">
+                                                    <option value="">asd</option>
+                                                </select>
+                                                
+                                            </div>
+                                           
+                                        </div>
+
+                                        
+                                        <div class="divformInputContainer" id="Descripcioninput">
+                                            <p>Descrpicion</p>
+                                            <div class="inputSignup" >
+    
+                                                <input type="text" name="" id="" class="">
+                                                
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="divformInputContainer" style="margin-top: 9%;">
+                                            <button id="botonenviar">Confirmar</button>
+                                           
+                                        </div>
 
 
-        </form>
+                                </div>
+                             </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        
+
+        <%- include ('./partials/footer.ejs') %>
+
 </body>
