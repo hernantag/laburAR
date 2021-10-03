@@ -50,18 +50,33 @@
 
             <div class="filterItem">
                 <select name="Experiencia" id="">
-                    <option value="vacio" selected hidden>Nivel de Experiencia</option>
-                    <option value="practicas">Practicas</option>
-                    <option value="junior">Junior</option>
-                    <option value="semisenior">Semi-senior</option>
-                    <option value="senior">Senior</option>
+                    
+                    <% if (nivel == 'vacio') { %>
+                        <option value="vacio" selected hidden>Nivel de Experiencia</option>
+                    <% } else { %>
+                        <option value="<%= nivel%>" selected hidden><%= nivel%></option>
+                        <option value="vacio">Sin seleccionar</option>
+                     <% }  %> 
+                    
+                    <option value="Practicas">Practicas</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Semi-senior">Semi-senior</option>
+                    <option value="Senior">Senior</option>
+
+
                 </select>
                 <i></i>
             </div>
 
+
+            <!-- CONSTRUCCION DE COMBOBOX RUBROS -->
             <div class="filterItem">
                 <select name="Rubro" id="">
+
+
+                    <!-- CHEQUEO SI RUBRO VIENE VACIO -->
                     <% if (rubroSeleccionado=='vacio' ) { %>
+                        <!-- SI VIENE VACIO SE MUESTRAN TODOS LOS RUBROS -->
                         <option value="vacio" hidden selected>Rubro</option>
                         <% rubros.forEach(element=> { %>
 
@@ -70,7 +85,9 @@
                             </option>
 
                             <% }) %>>
+
                                 <% } else { %>
+                                    <!-- SI NO VIENE VACIO HAY QUE MOSTRAR SOLO EL ELEGIDO Y BLOQUEARLO -->
                                     <option value="<%= rubroSeleccionado %> " hidden selected>
                                         <%= rubroSeleccionado %>
                                     </option>
@@ -82,28 +99,69 @@
 
             <div class="filterItem">
                 <select name="SubRubro" id="">
+                    <!-- SI RUBRO SELECCIONADO VIENE VACIO, HAY QUE DESACTIVAR SUBRUBRO -->
+
+
                     <% if (rubroSeleccionado=='vacio' ) { %>
-                        <option value="vacio" hidden selected>SubRubro</option>
+                        <option value="vacio" hidden selected >SubRubro</option>
+
+
+                    <!-- SI RUBRO SELECCIONADO VIENE CON ALGO HAY QUE MOSTRAR EL ELEGIDO O MOSTRAR TODOS -->
+
                     <% } else { %>
-                        <option value="vacio" hidden selected>SubRubro</option>
-                        <option value="">Fecha publicacion</option>
-                        <option value="">Fecha publicacion</option>
-                        <option value="">Fecha publicacion</option>
+
+                        
+                        <% if (subrubroSeleccionado == 'vacio') { %>
+
+                            <!-- SI VIENE SIN RUBRO SELECCIONADO MOSTRAMOS EL POR DEFECTO Y TODOS LOS CAMPOS -->
+
+                            <option value="vacio" hidden selected>SubRubro</option>
+
+                            <% listaSubRubros.forEach(element => { %>
+                                <option value="<%= element.Nombre %>"><%= element.Nombre %></option>
+                            <% }) %>
+                             
+                        <% } else { %>
+
+                         <!-- SI VIENE CON RUBRO SELECCIONADO MOSTRAMOS EL SELECCIONADO Y TODOS LOS CAMPOS -->
+
+                            <option value="<%= subrubroSeleccionado %>" hidden selected><%= subrubroSeleccionado %> </option>
+                            <option value="vacio">Sin seleccionar</option>
+                            <% listaSubRubros.forEach(element => { %>
+                                <option value="<%= element.Nombre %>"><%= element.Nombre %></option>
+                            <% }) %>
+                            
+                      
+                        
                         <% }  %>
-                    
+                        <% }  %>
                     
                 </select>
                 <i></i>
             </div>
 
-            <div class="filterItem">
+            <div class="filterItem" id="FilterDiv">
                 <button type="submit" id="filterButton">
                     FILTRAR
                 </button>
+
+                <a id="restablecerbtn" href="/Ofertante/Empleo">LIMPIAR</a>
+
             </div>
         </form>
 
-
+        <div class="divBackgroundUnderHeader">
+            <div class="backgroundHeaderTittle">
+                <p>¡Bienvenido <%= nombre %>!</p> 
+            </div>
+            <div class="backgroundHeaderSub">
+                <p>Conectate con quienes te necesitan</p> 
+            </div>
+                <div class="backgroundHeaderFooter">
+                   Mostrando solicitudes del <%= (pagina-1)*5  %> al  <%= (pagina)*5  %>, de <%= total %> en total
+                </div>
+                
+        </div>
 
 
         <div class="divBody-UnderHeader-Inner">
@@ -138,7 +196,7 @@
 
             </div>
 
-            <div class="divBody-UnderHeader-Inner-left" id="addOffer">
+            <!-- <div class="divBody-UnderHeader-Inner-left" id="addOffer">
 
                 <div class="divIconAndTittleLeftHeaderBottom">
 
@@ -150,7 +208,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -161,13 +219,17 @@
                         <p>Ultimas solicitudes de empleo</p>
                     </div>
                     <div class="dUiR-Header-subTittle">
-                        Mostrando <%= solicitudes.length %> solicitudes de <%= total %> en total
+                        <%= (pagina-1)*5  %> -  <%= (pagina)*5  %> de <%= total %> solicitudes en total
+                        <!-- <%= solicitudes.length %> solicitudes de <%= total %> en total -->
 
                     </div>
                 </div>
 
+                
 
+                
                 <% if (solicitudes.length> 0) { %>
+                    <div class="divInnerRightAllOffersContainer">
                     <% solicitudes.forEach(element=> { %>
                         <div class="divBody-UnderHeader-Inner-rightOffer">
 
@@ -191,7 +253,97 @@
                             </div>
 
                         </div>
+
+                    
+
                         <% }) %>
+                    </div>
+                        <div class="divPagination">
+
+
+                            <ul class="pagination">
+                    
+          
+                                
+                                <% if (filtrando==0) { %>
+                    
+                                    <!-- SI ES  -->
+                    
+                                    <% if (pagina !=1) { %>
+                    
+                                        <li class="asd">
+                                            
+                                            <a class="PaginationItems" href="/Ofertante/Empleo/<%= ((pagina)-1) %> ">Anterior</a>
+                    
+                                        </li>
+                    
+                                        <% } else { %>
+                    
+                                            <li class="asd">
+                                                <a class="PaginationItems"  href="/Ofertante/Empleo/<%= ((pagina)-1) %> "
+                                                    style="pointer-events: none" ;>Anterior</a>
+                    
+                                            </li>
+                                            <% } %>
+                    
+                                                <% if (solicitudes.length !=5) { %>
+                    
+                                                    <li class="asd">
+                                                        <a class="PaginationItems" 
+                                                            href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " style="pointer-events: none"
+                                                            ;>Siguiente</a>
+                                                    </li>
+                    
+                                                    <% } else { %>
+                    
+                                                        <li class="asd">
+                                                            <a class="PaginationItems" 
+                                                                href="/Ofertante/Empleo/<%= (pagina)-(-1) %> ">Siguiente</a>
+                                                        </li>
+                                                        <% } %>
+                    
+                    
+                    
+                                                            <% } else { %>
+                                                                <% if (pagina !=1) { %>
+                    
+                                                                    <li class="asd">
+                                                                        <a class="PaginationItems"
+                                                                            href="/Ofertante/Empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
+                                                                    </li>
+                    
+                                                                    <% } else { %>
+                                                                        <li class="asd">
+                    
+                                                                            <a class="PaginationItems"
+                                                                                href="/Ofertante/Empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
+                                                                                style="pointer-events: none" ;>Anterior</a>
+                    
+                                                                        </li>
+                                                                        <% } %>
+                    
+                                                                            <% if (solicitudes.length !=5) { %>
+                    
+                                                                                <li class="asd">
+                    
+                                                                                    <a class="PaginationItems" 
+                                                                                        href="/Ofertante/Empleo/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
+                                                                                        style="pointer-events: none" ;>Siguiente</a>
+                                                                                </li>
+                    
+                                                                                <% } else { %>
+                    
+                                                                                    <li class="asd">
+                    
+                                                                                        <a class="PaginationItems" 
+                                                                                            href="/Ofertante/Empleo/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
+                                                                                    </li>
+                                                                                    <% } %>
+                                                                                        <% } %>
+
+                    
+                            </ul>
+                        </div
                             <% } else { %>
 
                                 <div class="divNoSolicitudes">
@@ -215,101 +367,7 @@
 
     </div>
 
-    <div class="divPagination">
-
-
-        <ul class="pagination">
-
-
-
-
-
-
-            <% if (filtrando==0) { %>
-
-                <!-- SI ES  -->
-
-                <% if (pagina !=1) { %>
-
-                    <li class="page-item">
-                        <a class="PaginationItems" href="/Ofertante/Empleo/<%= ((pagina)-1) %> ">Anterior</a>
-
-                    </li>
-
-                    <% } else { %>
-
-                        <li class="page-item">
-                            <a class="PaginationItems" id="nextpage" href="/Ofertante/Empleo/<%= ((pagina)-1) %> "
-                                style="pointer-events: none" ;>Anterior</a>
-
-                        </li>
-                        <% } %>
-
-                            <% if (solicitudes.length !=5) { %>
-
-                                <li class="page-item">
-                                    <a class="PaginationItems" id="nextpage"
-                                        href="/Ofertante/Empleo/<%= (pagina)-(-1) %> " style="pointer-events: none"
-                                        ;>Siguiente</a>
-                                </li>
-
-                                <% } else { %>
-
-                                    <li class="page-item">
-                                        <a class="PaginationItems" id="nextpage"
-                                            href="/Ofertante/Empleo/<%= (pagina)-(-1) %> ">Siguiente</a>
-                                    </li>
-                                    <% } %>
-
-
-
-                                        <% } else { %>
-                                            <% if (pagina !=1) { %>
-
-                                                <li class="page-item">
-                                                    <a class="PaginationItems"
-                                                        href="/Ofertante/Empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
-                                                </li>
-
-                                                <% } else { %>
-                                                    <li class="page-item">
-
-                                                        <a class="PaginationItems" id="nextpage"
-                                                            href="/Ofertante/Empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
-                                                            style="pointer-events: none" ;>Anterior</a>
-
-                                                    </li>
-                                                    <% } %>
-
-                                                        <% if (solicitudes.length !=5) { %>
-
-                                                            <li class="page-item">
-
-                                                                <a class="PaginationItems" id="nextpage"
-                                                                    href="/Ofertante/Empleo/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
-                                                                    style="pointer-events: none" ;>Siguiente</a>
-                                                            </li>
-
-                                                            <% } else { %>
-
-                                                                <li class="page-item">
-
-                                                                    <a class="PaginationItems" id="nextpage"
-                                                                        href="/Ofertante/Empleo/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
-                                                                </li>
-                                                                <% } %>
-                                                                    <% } %>
-
-
-
-
-
-
-
-
-
-        </ul>
-    </div>
+    >
     <!-- FOOTER -->
     <%- include ('./partials/footer.ejs') %>
 </body>
