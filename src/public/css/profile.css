@@ -1,0 +1,139 @@
+body{
+    
+    background-color: #EEEEEE;
+    
+}
+.headerContainer{
+    z-index: 122;
+    height: 11vh;
+    background-color: #FFF;
+    width: 100%;
+    box-shadow: 0px 1px 8px 0px #c0c8d6; 
+}
+
+.headerContainerInside{
+    height: 100%;
+    background-color: transparent;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: #393E46;
+    
+}
+ul{
+    list-style-type: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    
+}
+
+.headerContainerInside li{
+    list-style-type: none;
+    display: table-cell;
+    
+
+}
+
+.nav-Item{
+    display: flex;
+    justify-content: start;
+    height: 100%;
+    min-width: 20%;
+    padding-top: 6%;
+    margin-right: 3% ;
+    margin-left: 3% ;
+}
+
+.nav-Item button{
+    
+    background-color: transparent;
+    min-width: 5rem;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 4px;
+    text-decoration: none;
+    color: #222831 ;
+    font-size: 0.81rem;
+    border: none;
+    
+    
+
+}
+.nav-Item a{
+    
+    background-color: transparent;
+    min-width: 5rem;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 4px;
+    text-decoration: none;
+    color: #222831 ;
+    font-size: 0.81rem;
+    border: none;
+    
+
+}
+#logout{
+    
+    background-color: #00ADB5 ;
+    min-width: 4rem;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 4px;
+    text-decoration: none;
+    color: #ffffff ;
+    font-size: 0.81rem;
+    border: none;
+    padding-left: 35%;
+    padding-right: 35%;
+
+}
+
+#perfilMargin{
+margin-right: -3%;
+}
+#divInicio{
+    margin-right: 4%;
+}
+#logoutDiv{
+    margin-left: 25%;
+}
+
+.div-Logo{
+    padding-top: 0.6%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100px;
+    font-family: 'Birthstone', cursive;
+    font-size: 2rem;
+}
+
+
+/* AQUI EMPIEZA EL BODY */
+
+.divUnderHeader{
+    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+   
+    width: 100%;
+}
+
+
+.divUnderHeader-BODY{
+    
+    margin: auto;
+    margin-top: 1px;
+    
+    display: flex;
+    height: 60%;
+    background-color: #fff;
+    width: 100%;
+}

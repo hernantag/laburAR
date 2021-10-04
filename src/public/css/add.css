@@ -92,8 +92,12 @@ ul{
     padding-right: 35%;
 
 }
+
+#perfilMargin{
+margin-right: -3%;
+}
 #divInicio{
-    margin-right: -3%;
+    margin-right: 4%;
 }
 #logoutDiv{
     margin-left: 25%;
