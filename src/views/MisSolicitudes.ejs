@@ -35,7 +35,7 @@
 
     <div class="divBody-UnderHeader">
 
-        <form class="divBody-Filter" action="/empleo/misOfertas/1" method="POST">
+        <form class="divBody-Filter" action="/empleo/MisSolicitudes/1" method="POST">
 
 
             <div class="filterItem">
@@ -145,7 +145,7 @@
                     FILTRAR
                 </button>
 
-                <a id="restablecerbtn" href="/empleo/misOfertas/1">LIMPIAR</a>
+                <a id="restablecerbtn" href="/empleo/MisSolicitudes/1">LIMPIAR</a>
 
             </div>
         </form>
@@ -167,7 +167,7 @@
         
         <div class="divBody-UnderHeader-Inner">
 
-        <%- include ('./partials/asideleftOfer.ejs') %> 
+        <%- include ('./partials/asideleftSoli.ejs') %> 
 
 
             <div class="divBody-UnderHeader-Inner-right">
@@ -177,7 +177,7 @@
                     </div>
                     <div class="dUiR-Header-subTittle">
                         <%= (pagina-1)*5  %> -  <%= (pagina)*5  %> de <%= total %> solicitudes en total
-                        <!-- <%= ofertas.length %> solicitudes de <%= total %> en total -->
+                        <!-- <%= solicitudes.length %> solicitudes de <%= total %> en total -->
 
                     </div>
                 </div>
@@ -185,8 +185,8 @@
                 
 
                 
-                <% if (ofertas.length> 0) { %>
-                    <%- include ('./partials/asideallcnt.ejs') %>
+                <% if (solicitudes.length> 0) { %>
+                    <%- include ('./partials/allOfferCont.ejs') %>
 
 
                         <div class="divPagination">
@@ -204,24 +204,24 @@
                     
                                         <li class="asd">
                                             
-                                            <a class="PaginationItems" href="/empleo/misOfertas/<%= ((pagina)-1) %> ">Anterior</a>
+                                            <a class="PaginationItems" href="/empleo/MisSolicitudes/<%= ((pagina)-1) %> ">Anterior</a>
                     
                                         </li>
                     
                                         <% } else { %>
                     
                                             <li class="asd">
-                                                <a class="PaginationItems"  href="/empleo/misOfertas/<%= ((pagina)-1) %> "
+                                                <a class="PaginationItems"  href="/empleo/MisSolicitudes/<%= ((pagina)-1) %> "
                                                     style="pointer-events: none" ;>Anterior</a>
                     
                                             </li>
                                             <% } %>
                     
-                                                <% if (ofertas.length !=5) { %>
+                                                <% if (solicitudes.length !=5) { %>
                     
                                                     <li class="asd">
                                                         <a class="PaginationItems" 
-                                                            href="/empleo/misOfertas/<%= (pagina)-(-1) %> " style="pointer-events: none"
+                                                            href="/empleo/MisSolicitudes/<%= (pagina)-(-1) %> " style="pointer-events: none"
                                                             ;>Siguiente</a>
                                                     </li>
                     
@@ -229,7 +229,7 @@
                     
                                                         <li class="asd">
                                                             <a class="PaginationItems" 
-                                                                href="/empleo/misOfertas/<%= (pagina)-(-1) %> ">Siguiente</a>
+                                                                href="/empleo/MisSolicitudes/<%= (pagina)-(-1) %> ">Siguiente</a>
                                                         </li>
                                                         <% } %>
                     
@@ -240,25 +240,25 @@
                     
                                                                     <li class="asd">
                                                                         <a class="PaginationItems"
-                                                                            href="/empleo/misOfertas/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
+                                                                            href="/empleo/MisSolicitudes/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
                                                                     </li>
                     
                                                                     <% } else { %>
                                                                         <li class="asd">
                     
                                                                             <a class="PaginationItems"
-                                                                                href="/empleo/misOfertas/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
+                                                                                href="/empleo/MisSolicitudes/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
                                                                                 style="pointer-events: none" ;>Anterior</a>
                     
                                                                         </li>
                                                                         <% } %>
                     
-                                                                            <% if (ofertas.length !=5) { %>
+                                                                            <% if (solicitudes.length !=5) { %>
                     
                                                                                 <li class="asd">
                     
                                                                                     <a class="PaginationItems" 
-                                                                                        href="/empleo/misOfertas/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
+                                                                                        href="/empleo/MisSolicitudes/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
                                                                                         style="pointer-events: none" ;>Siguiente</a>
                                                                                 </li>
                     
@@ -267,7 +267,7 @@
                                                                                     <li class="asd">
                     
                                                                                         <a class="PaginationItems" 
-                                                                                            href="/empleo/misOfertas/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
+                                                                                            href="/empleo/MisSolicitudes/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
                                                                                     </li>
                                                                                     <% } %>
                                                                                         <% } %>

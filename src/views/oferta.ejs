@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/oferta-soli.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;1,300&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/be85762cea.js" crossorigin="anonymous"></script>
+    <title>Oferta</title>
+
+</head>
+<body>
+    <header>
+        <%- include ('./partials/header.ejs') %>
+    </header>
+    
+
+
+    <div class="divUnderHeader">
+        <div class="divUnderHeaderInner">
+            
+            <div class="divUnderHeaderInner-Tittle">
+               
+                    <p><%= oferta[0].Titulo %> </p>
+            </div>
+            <div class="divUnderHeaderInner-SubTittle">
+               <p>Publicado por <%= usuario[0].nombre%> <%= usuario[0].apellido%> el dia <%= oferta[0].fecha_i %></p>
+            </div>
+            <div class="divUnderHeaderInner-Caract">
+                <div class="divContainterlogoCarac">
+                    <i class="fas fa-briefcase" style="font-size: 1.3rem;"></i>
+                    <p>Rubro: <%= rubro[0].Nombre%> </p>
+                </div>
+
+                <div class="divContainterlogoCarac">
+                    <i class="fas fa-briefcase" style="font-size: 1.3rem;"></i>
+                    <p>SubRubro: <%= subrubro[0].Nombre%> </p>
+                </div>
+                <div class="divContainterlogoCarac">
+                    <i class="fas fa-user-tie" style="font-size: 1.3rem;"></i>
+                    <p>Nivel de experiencia requerido: <%= oferta[0].Nivel%> </p>
+                </div>
+                
+            </div>
+            <div class="divUnderHeaderInner-descr">
+                <%= oferta[0].Descripcion %>
+
+            </div>
+
+            <div class="divBotones" >
+                <% if (usuariologueado.tipo == 'ofertante') { %>
+               
+                    <% if (usuariologueado.idusuario == oferta[0].idusuario) { %>
+                        <form action="/oferta/eliminar/<%= oferta[0].ID_Oferta %> " method="POST">
+                        <button>Eliminar publicacion</button>
+                    </form>
+                    <% } %>
+
+                
+                <% } else { %>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal">¡Quiero postularme!</button>
+                    <a href="/perfil/<%= oferta[0].idusuario %> ">Perfil de ofertante</a>
+
+                    <% }  %>
+                </div>
+
+
+
+        </div>
+    </div>
+
+<!-- Modal -->
+<form class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/oferta/postularse/<%= oferta[0].ID_Oferta %> " method="POST">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Postularse</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h1>¡Escribe un mensaje!</h1>
+          <textarea name="Descripcion" rows="3" style="width: 100%; margin-top: 5%;"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Enviar postulacion</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <% if (usuariologueado.tipo == 'ofertante') { %>
+               
+        <% if (usuariologueado.idusuario == oferta[0].idusuario) { %>
+            
+            <div class="divUnderHeader">
+                <div class="divUnderHeaderInner">
+                    <div class="divUnderHeaderInner-Tittle">
+               
+                        <H1>Postulantes</H1>
+                     </div>
+
+                     <div class="allpostulacionescont">
+                    
+                     <% postulaciones.forEach(element => { %>
+                     <div class="postulacionCnt">
+                         <div class="postulacionCnt-Tittle">
+                             <a href="/perfil/<%= element.idusuario %>"><%= element.nombre %> <%= element.apellido %></a>
+                            
+                         </div>
+                        <div class="postulacionCnt-Info"><p><%= element.Descripcion %> </p></div>
+                     </div>
+                     <% }) %> 
+
+                    </div>
+                            
+                             
+                       
+                </div>
+        
+            </div>
+        <% } %>
+
+        <% } %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

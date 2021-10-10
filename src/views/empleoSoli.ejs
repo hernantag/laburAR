@@ -28,14 +28,14 @@
 
 <body>
     <header>
-        <%- include ('./partials/header.ejs') %>
+        <%- include ('./partials/header2.ejs') %>
     </header>
 
 
 
     <div class="divBody-UnderHeader">
 
-        <form class="divBody-Filter" action="/empleo/misOfertas/1" method="POST">
+        <form class="divBody-Filter" action="/solicitante/empleo/Filter/1" method="POST">
 
 
             <div class="filterItem">
@@ -145,21 +145,21 @@
                     FILTRAR
                 </button>
 
-                <a id="restablecerbtn" href="/empleo/misOfertas/1">LIMPIAR</a>
+                <a id="restablecerbtn" href="/solicitante/empleo/1">LIMPIAR</a>
 
             </div>
         </form>
 
-        <!-- imagen debajo del header -->
+        
         <div class="divBackgroundUnderHeader">
             <div class="backgroundHeaderTittle">
                 <p>¡Bienvenido <%= nombre %>!</p> 
             </div>
             <div class="backgroundHeaderSub">
-                <p>Te conectaremos con quienes te necesitan</p> 
+                <p>Conectate con quienes te necesitan</p> 
             </div>
                 <div class="backgroundHeaderFooter">
-                   Mostrando tus ofertas del <%= (pagina-1)*5  %> al  <%= (pagina)*5  %>, de <%= total %> en total
+                   Mostrando ofertas del <%= (pagina-1)*5  %> al  <%= (pagina)*5  %>, de <%= total %> en total
                 </div>
                 
         </div>
@@ -167,17 +167,17 @@
         
         <div class="divBody-UnderHeader-Inner">
 
-        <%- include ('./partials/asideleftOfer.ejs') %> 
+        <%- include ('./partials/asideleftSoli.ejs') %> 
 
 
             <div class="divBody-UnderHeader-Inner-right">
                 <div class="dUiR-Header">
                     <div class="dUiR-Header-Tittle">
-                        <p>Tus ultimas ofertas laborales</p>
+                        <p>Ultimas ofertas de empleo</p>
                     </div>
                     <div class="dUiR-Header-subTittle">
-                        <%= (pagina-1)*5  %> -  <%= (pagina)*5  %> de <%= total %> solicitudes en total
-                        <!-- <%= ofertas.length %> solicitudes de <%= total %> en total -->
+                        <%= (pagina-1)*5  %> -  <%= (pagina)*5  %> de <%= total %> ofertas en total
+                        <!-- <%= ofertas.length %> ofertas de <%= total %> en total -->
 
                     </div>
                 </div>
@@ -187,8 +187,6 @@
                 
                 <% if (ofertas.length> 0) { %>
                     <%- include ('./partials/asideallcnt.ejs') %>
-
-
                         <div class="divPagination">
 
 
@@ -204,14 +202,14 @@
                     
                                         <li class="asd">
                                             
-                                            <a class="PaginationItems" href="/empleo/misOfertas/<%= ((pagina)-1) %> ">Anterior</a>
+                                            <a class="PaginationItems" href="/solicitante/empleo/<%= ((pagina)-1) %> ">Anterior</a>
                     
                                         </li>
                     
                                         <% } else { %>
                     
                                             <li class="asd">
-                                                <a class="PaginationItems"  href="/empleo/misOfertas/<%= ((pagina)-1) %> "
+                                                <a class="PaginationItems"  href="/solicitante/empleo/<%= ((pagina)-1) %> "
                                                     style="pointer-events: none" ;>Anterior</a>
                     
                                             </li>
@@ -221,7 +219,7 @@
                     
                                                     <li class="asd">
                                                         <a class="PaginationItems" 
-                                                            href="/empleo/misOfertas/<%= (pagina)-(-1) %> " style="pointer-events: none"
+                                                            href="/solicitante/empleo/<%= (pagina)-(-1) %> " style="pointer-events: none"
                                                             ;>Siguiente</a>
                                                     </li>
                     
@@ -229,7 +227,7 @@
                     
                                                         <li class="asd">
                                                             <a class="PaginationItems" 
-                                                                href="/empleo/misOfertas/<%= (pagina)-(-1) %> ">Siguiente</a>
+                                                                href="/solicitante/empleo/<%= (pagina)-(-1) %> ">Siguiente</a>
                                                         </li>
                                                         <% } %>
                     
@@ -240,14 +238,14 @@
                     
                                                                     <li class="asd">
                                                                         <a class="PaginationItems"
-                                                                            href="/empleo/misOfertas/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
+                                                                            href="/solicitante/empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %> ">Anterior</a>
                                                                     </li>
                     
                                                                     <% } else { %>
                                                                         <li class="asd">
                     
                                                                             <a class="PaginationItems"
-                                                                                href="/empleo/misOfertas/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
+                                                                                href="/solicitante/empleo/Filter/<%= ((pagina)-1) %>/<%= consulta %>  "
                                                                                 style="pointer-events: none" ;>Anterior</a>
                     
                                                                         </li>
@@ -258,7 +256,7 @@
                                                                                 <li class="asd">
                     
                                                                                     <a class="PaginationItems" 
-                                                                                        href="/empleo/misOfertas/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
+                                                                                        href="/solicitante/empleo/Filter/ <%= (pagina)-(-1) %>/<%= consulta %>"
                                                                                         style="pointer-events: none" ;>Siguiente</a>
                                                                                 </li>
                     
@@ -267,7 +265,7 @@
                                                                                     <li class="asd">
                     
                                                                                         <a class="PaginationItems" 
-                                                                                            href="/empleo/misOfertas/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
+                                                                                            href="/solicitante/empleo/Filter/<%= (pagina)-(-1) %>/<%= consulta %>">Siguiente</a>
                                                                                     </li>
                                                                                     <% } %>
                                                                                         <% } %>
@@ -278,7 +276,7 @@
                             <% } else { %>
 
                                 <div class="divNoSolicitudes">
-                                    <p>No hay solicitudes disponibles :(</p>
+                                    <p>No hay ofertas disponibles :(</p>
                                 </div>
                                 <div class="divNoSolicitudes">
                                     <i class="fas fa-sad-cry" id="iconNoSolicitudes"></i>

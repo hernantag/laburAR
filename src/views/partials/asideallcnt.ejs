@@ -1,5 +1,5 @@
 <div class="divInnerRightAllOffersContainer">
-    <% solicitudes.forEach(element=> { %>
+    <% ofertas.forEach(element=> { %>
         <div class="divBody-UnderHeader-Inner-rightOffer">
 
             <div class="dUiR-ImageContainer">
@@ -8,12 +8,12 @@
             <div class="dUiR-TextContainer">
 
                 <div class="dUiR-TextContainer-Tittle">
-                    <a href=""></a>
+                   
                     <p>
                         <% let string =  element.Titulo %> 
                         <% string = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase(); %>
-                        <a href="/empleo/solicitud/<%= element.ID_Solicitud%>"><%= string %></a>
-                        
+
+                        <a href="/empleo/oferta/<%= element.ID_Oferta %>"  ><%= string %></a>
                     </p>
                 </div>
                 <div class="dUiR-TextContainer-Info">

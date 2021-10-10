@@ -21,12 +21,20 @@ router.post('/signin', passport.authenticate('local-signin',{
     passReqToCallback:true
 }))
 
+router.get('/prueba', (req,res) =>{
+    usuario = {
+        nombre:'jose',
+        apellido:'perez'
+    }
+    
+    res.render('prueba.ejs',usuario)
+} ) 
 
 
 router.get('/', (req,res,next) =>{
     if (req.isAuthenticated()){
         if (req.user.tipo == "ofertante") res.redirect("/Ofertante/Empleo/1");
-        if (req.user.tipo == "solicitante") res.redirect("/inicio/Solicitante");
+        if (req.user.tipo == "solicitante") res.redirect("/solicitante/empleo/1");
         if (req.user.tipo == "admin") res.redirect("/inicio/Admin");
     }
     res.render('index.ejs')

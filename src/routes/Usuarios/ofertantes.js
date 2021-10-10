@@ -1,10 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const pool = require("../../database/database");
-const { loggedIn, isOfertante } = require('../../passport/helpers')
+const { loggedIn, isOfertante, isSolicitante } = require('../../passport/helpers')
 
 
 
+router.post('/oferta/eliminar/:idof', loggedIn, async (req,res) => {
+
+  idof = req.params.idof
+  pool.query("DELETE FROM oferta WHERE ID_Oferta = ?",[idof])
+  pool.query("DELETE FROM postulacion WHERE ID_Oferta = ?",[idof])
+
+  res.redirect('/Ofertante/Empleo/1')
+})
 
 
 router.get('/ofertante/perfil', loggedIn, isOfertante, (req, res, next) => {
@@ -251,12 +259,26 @@ router.get('/Ofertante/Empleo/Filter/:page/:query', loggedIn, isOfertante, async
 
 
 
-router.get('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res, next) => {
+router.get('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => {
+  
+  subrubros = await pool.query("SELECT Nombre,ID_Rubro,ID_SubRubro FROM subrubro")
 
-  res.render('agregarOfer',)
+
+  rubros = await pool.query("SELECT Nombre,ID_Rubro FROM rubro")
+
+  
+  
+  res.render('agregarOfer',{rubros,subrubros})
 })
 
 
+router.post('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => {
+  
+
+
+  await pool.query("INSERT INTO oferta (Titulo,Descripcion,Imagen,idusuario,ID_Rubro,ID_SubRubro,Nivel,fecha_i,fecha_f) VALUES (?,?,0,?,?,?,?,NOW(),NOW())",[req.body.titulo,req.body.descripcion,req.user.idusuario,req.body.rubro,req.body.subrubro,req.body.nivel])
+  res.redirect('/empleo/misOfertas/1')
+})
 
 
 
@@ -275,7 +297,7 @@ router.get('/empleo/misOfertas/:page', loggedIn, isOfertante, async (req, res, n
   let page = ((req.params.page - 1) * 5)
 
   //HACES LA QUERY LIMITADA A 5 ELEMENTOS
-  let solicitudes = await pool.query("SELECT * FROM oferta WHERE idusuario = ? LIMIT ?, ?;", [req.user.idusuario, page, 5]);
+  let ofertas = await pool.query("SELECT * FROM oferta WHERE idusuario = ? LIMIT ?, ?;", [req.user.idusuario, page, 5]);
   let nombre = req.user.nombre
   let pagina = (req.params.page)
 
@@ -296,7 +318,7 @@ router.get('/empleo/misOfertas/:page', loggedIn, isOfertante, async (req, res, n
 
   //RENDERIZAMOS LA PAG
   res.render('MisOfertas.ejs', {
-    solicitudes, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
+    ofertas, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
 
   })
 })

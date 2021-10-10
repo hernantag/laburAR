@@ -259,6 +259,10 @@ margin-left: 3%;
     font-size: 1.1rem;
     text-decoration: none;
 }
+.bodyinfoleft-body-item a:hover{
+    
+    text-decoration: underline;
+}
 
 .bodyinforight{
     margin-top: 2%;
