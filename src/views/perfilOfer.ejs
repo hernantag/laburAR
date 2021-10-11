@@ -29,13 +29,23 @@
 
                 <div class="divUnderHeader-BODY">
                     <div class="bodyPortada">
-                       
+                      <% if (usuario.portada) { %>
+                        <img src="/portadas/<%= usuario.portada %> " alt="">
+                      <% } %>
+                      
+                      <i class="fas fa-camera añadirportada" data-bs-toggle="modal" data-bs-target="#modalportada"></i>
+
                     </div>
                     
                 </div>
                 <div class="tituloyperfil">
+                  <i class="fas fa-camera añadirfoto" data-bs-toggle="modal" data-bs-target="#modalfoto"></i>
                     <div class="perfilimagen">
-
+                      <% if (!usuario.image) { %>
+                        <img src="/img/default.jpg" alt="Perfil image" >
+                      <% } else { %>
+                        <img src="/<%= usuario.image %>" alt="Perfil image" >
+                        <% } %>
                     </div>
                         <div class="solotitulo">
                             
@@ -50,12 +60,12 @@
                             </div>
                             <div class="bodyinfoleft-body">
                                 <div class="bodyinfoleft-body-item">
-                                    <i class="fas fa-check-circle "></i>
+                                    <i class="fas fa-check-circle " ></i>
                                     <a class="mleftItem" data-bs-toggle="modal" data-bs-target="#modalVerificarse">¡Quiero verificarme!</a>   
                                 </div>
                                 <div class="bodyinfoleft-body-item">
                                     <i class="fas fa-user-edit"></i>
-                                    <a class="mleftItem" href="">Editar informacion</a>   
+                                    <a class="mleftItem" href="/ofertante/perfil/editarPerfil">Editar informacion</a>   
                                 </div>
                                
                                 <div class="bodyinfoleft-body-item">
@@ -67,21 +77,46 @@
                     <div class="bodyinforight">
                         <div class="bodyinforight-Tittle">
                             <span>Informacion</span>
+                            <i style="font-size: 0.7rem;">Los campos marcados con un * no seran vistos por los demas usuarios</i>
                         </div>
 
                         <div class="bodyinforight-infoContainer">
                             <div class="containerhalfed">
                                 <div class="inputpluslabelhalfed">
                                     <label for="">Nombre</label>
-                                    <input class="inputinfo" type="text" name="" id="">
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario.nombre  %> " disabled>
                                 </div>
                                 <div class="inputpluslabelhalfed">
                                     <label for="">Apellido</label>
-                                    <input class="inputinfo" type="text" name="" id="">
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario.apellido  %>" disabled>
                                 </div>
                             </div>
+
+                            <div class="containerhalfed" style="margin-top: 4%;">
+                              <div class="inputpluslabelhalfed">
+                                  <label for="">*DNI</label>
+                                  <input class="inputinfo" type="text" name="" id="" value="<%= usuario.DNI  %> " disabled>
+                              </div>
+                              <div class="inputpluslabelhalfed">
+                                  <label for="">*Telefono</label>
+                                  <input class="inputinfo" type="text" name="" id="" value="<%= usuario.telefono  %>" disabled>
+                              </div>
+                          </div>
+
+                          <div class="bodyinforight-infoContainer" style="height: auto;">
+
+                            <label for="" style="font-size: 1.1rem; margin-top: 5%;">*E-Mail</label>
+                            <input class="inputinfo" type="text" name="" id="" value="<%= usuario.correo  %>" disabled  style="font-size: 1.1rem;">
+
+                          </div>
+
+                            <div class="bodyinforight-infoContainer">
+
+                              <label for="" style="font-size: 1.1rem; margin-top: 5%;">Acerca de mi</label>
+                              <textarea class="inputinfo" name="" id="" rows="5"  style="font-size: 1.1rem;" disabled><%= usuario.biografia  %></textarea>
+                            </div>
                             
-                            
+                           
                             
 
                         </div>
@@ -110,6 +145,43 @@
       </div>
     </div>
   </div>
+  <!-- Modal foto -->
+<form class="modal fade" id="modalfoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/ofertante/subirfoto" method="post" enctype="multipart/form-data">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" name="imagen" accept="image/*">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Verificarme</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+ <!-- Modal portada -->
+ <form class="modal fade" id="modalportada" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/ofertante/subirportada" method="post" enctype="multipart/form-data">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" name="imagen" accept="image/*">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Verificarme</button>
+      </div>
+    </div>
+  </div>
+</form>
 
   <!-- Modal cv -->
 <div class="modal fade" id="modalCV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

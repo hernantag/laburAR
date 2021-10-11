@@ -2,9 +2,111 @@ const { Router } = require('express');
 const express = require('express')
 const pool = require("../../database/database");
 const router = express.Router()
+const path = require('path')
 const {loggedIn,isSolicitante, isOfertante} = require('../../passport/helpers')
 
 
+
+
+router.post('/solicitante/verificarse',loggedIn,isSolicitante,  async(req, res, next) => {
+
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+    fotoDNI = req.files.fotoDNI
+ carpetita = path.join(__dirname + ('/uploads/verificaciones/'))
+
+ console.log(carpetita)
+      
+      
+ fotoDNI.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET imgver = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      pool.query("UPDATE usuario SET verificado = 'proceso' WHERE idusuario = ?", [req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.post('/solicitante/subircv',loggedIn,isSolicitante,  async(req, res, next) => {
+
+  
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+ pdf = req.files.pdf
+ carpetita = path.join(__dirname + ('/uploads/cvs/'))
+
+ console.log(carpetita)
+      
+      
+ pdf.mv((carpetita +  req.user.idusuario +'.pdf'))
+      pool.query("UPDATE usuario SET cv = ? WHERE idusuario = ?", [req.user.idusuario +'.pdf',req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.post('/solicitante/subirportada',loggedIn,isSolicitante,  async(req, res, next) => {
+
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+ imagen = req.files.imagen
+ carpetita = path.join(__dirname + ('/uploads/portadas/'))
+
+ console.log(carpetita)
+      
+      
+    imagen.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET portada = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.post('/solicitante/subirfoto',loggedIn,isSolicitante,  async(req, res, next) => {
+
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+ imagen = req.files.imagen
+ carpetita = path.join(__dirname + ('/uploads/'))
+
+ console.log(carpetita)
+      
+      
+    imagen.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET image = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.get('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, (req, res, next) => {
+
+
+  usuario = req.user
+  res.render('EditarPerfilSol.ejs',usuario)
+})
+
+router.post('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, async(req, res, next) => {
+
+  pool.query("UPDATE usuario SET biografia = ? , telefono = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.user.idusuario])
+  
+  res.redirect("/solicitante/perfil")
+})
 
 
 router.post('/oferta/postularse/:id', loggedIn,isSolicitante, async (req,res) => {

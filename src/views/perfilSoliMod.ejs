@@ -29,13 +29,19 @@
 
                 <div class="divUnderHeader-BODY">
                     <div class="bodyPortada">
-                       
+                      <% if (usuario[0].portada) { %>
+                        <img src="/portadas/<%= usuario[0].portada %> " alt="">
+                      <% } %>
                     </div>
                     
                 </div>
                 <div class="tituloyperfil">
                     <div class="perfilimagen">
-
+                      <% if (!usuario[0].image) { %>
+                        <img src="/img/default.jpg" alt="Perfil image" >
+                      <% } else { %>
+                        <img src="/<%= usuario[0].image %>" alt="Perfil image" >
+                        <% } %>
                     </div>
                         <div class="solotitulo">
                             
@@ -46,7 +52,7 @@
                 <div class="bodyinfo">
                 
 
-                    <div class="bodyinforight" style="width: 100%;">
+                    <div class="bodyinforight" style="width: 100%; height: 75%;">
                         <div class="bodyinforight-Tittle">
                             <span>Informacion</span>
                         </div>
@@ -55,14 +61,20 @@
                             <div class="containerhalfed">
                                 <div class="inputpluslabelhalfed">
                                     <label for="">Nombre</label>
-                                    <input class="inputinfo" type="text" name="" id="">
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario[0].nombre  %> "disabled>
                                 </div>
                                 <div class="inputpluslabelhalfed">
                                     <label for="">Apellido</label>
-                                    <input class="inputinfo" type="text" name="" id="">
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario[0].apellido  %>"disabled>
                                 </div>
+                          
+                               
                             </div>
-                            
+                            <div class="bodyinforight-infoContainer">
+
+                              <label for="" style="font-size: 1.1rem; margin-top: 4%;">Acerca de mi</label>
+                              <textarea class="inputinfo" name="bio" id="" rows="5"  style="font-size: 1.1rem;" disabled><%= usuario[0].biografia  %> </textarea>
+                            </div>
                             
                             
 

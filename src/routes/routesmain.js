@@ -1,11 +1,14 @@
 const express = require('express')
 const passport = require('passport')
 const router = express.Router()
-
+const path = require('path')
+const pool = require('../database/database')
 
 router.get('/inicio', (req,res,next) =>{
     res.render('inicio.ejs')
 })
+
+
 
 
 
