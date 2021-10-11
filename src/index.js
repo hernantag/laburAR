@@ -6,6 +6,8 @@ const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('connect-flash')
+const fuP = require('express-fileupload')
+
 require("./passport/local-auth");
 
 //settings
@@ -14,6 +16,9 @@ app.set('view engine','ejs')
 app.set("views", path.join(__dirname, "views"));
 
 //MIDDLEWARES
+
+app.use(fuP())
+
 app.use(morgan('dev'))
 app.use(urlencoded({extended:false}))
 app.use(session({
@@ -30,6 +35,7 @@ app.use(passport.session())
 //STATIC FILES
  
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/routes/Usuarios/uploads"));
 
 //ROUTER
 app.use(require('./routes/routesmain'))

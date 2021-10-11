@@ -29,100 +29,85 @@
 
                 <div class="divUnderHeader-BODY">
                     <div class="bodyPortada">
-                      <% if (usuario[0].portada) { %>
-                        <img src="/portadas/<%= usuario[0].portada %> " alt="">
-                      <% } %>
+                        <% if (usuario.portada) { %>
+                            <img src="/portadas/<%= usuario.portada %> " alt="">
+                          <% } %>
                     </div>
                     
                 </div>
                 <div class="tituloyperfil">
                     <div class="perfilimagen">
-                      <% if (!usuario[0].image) { %>
-                        <img src="/img/default.jpg" alt="Perfil image" >
-                      <% } else { %>
-                        <img src="/<%= usuario[0].image %>" alt="Perfil image" >
-                        <% } %>
+                        <% if (!usuario.image) { %>
+                            <img src="/img/default.jpg" alt="Perfil image" >
+                          <% } else { %>
+                            <img src="/<%= usuario.image %>" alt="Perfil image" >
+                            <% } %>
                     </div>
                         <div class="solotitulo">
                             
-                            <p><%= usuario[0].nombre %> <%= usuario[0].apellido %> </p>
+                            <p><%= usuario.nombre %> <%= usuario.apellido %> </p>
                         </div>
                 </div>
 
                 <div class="bodyinfo">
                 
 
-                    <div class="bodyinforight" style="width: 100%;">
+                    <form class="bodyinforight" style="width: 100%;" action="/solicitante/perfil/editarPerfil" method="POST">
                         <div class="bodyinforight-Tittle">
                             <span>Informacion</span>
+                            <i style="font-size: 0.7rem;">Los campos marcados con un * no pueden ser modificados una vez creada la cuenta</i>
                         </div>
 
                         <div class="bodyinforight-infoContainer">
                             <div class="containerhalfed">
                                 <div class="inputpluslabelhalfed">
-                                    <label for="">Nombre</label>
-                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario[0].nombre  %> "disabled>
+                                    <label for="">*Nombre</label>
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario.nombre  %>  " disabled>
                                 </div>
                                 <div class="inputpluslabelhalfed">
-                                    <label for="">Apellido</label>
-                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario[0].apellido  %>"disabled>
+                                    <label for="">*Apellido</label>
+                                    <input class="inputinfo" type="text" name="" id="" value="<%= usuario.apellido  %> " disabled>
                                 </div>
-                          
-                               
                             </div>
+
+                            <div class="containerhalfed" style="margin-top: 2%;">
+                              <div class="inputpluslabelhalfed">
+                                  <label for="">*DNI</label>
+                                  <input class="inputinfo" type="text" name="" id="" value="<%= usuario.DNI  %> " disabled>
+                              </div>
+                              <div class="inputpluslabelhalfed">
+                                  <label for="">Telefono</label>
+                                  <input class="inputinfo" type="text" name="telefono" id="" value="<%= usuario.telefono  %>" >
+                              </div>
+                          </div>
+
+                          <div class="bodyinforight-infoContainer" style="height: auto;">
+
+                            <label for="" style="font-size: 1.1rem; margin-top: 3%;">E-Mail</label>
+                            <input class="inputinfo" type="text" name="" id="" value="<%= usuario.correo  %>" disabled  style="font-size: 1.1rem;" disabled>
+
+                          </div>
+
                             <div class="bodyinforight-infoContainer">
 
                               <label for="" style="font-size: 1.1rem; margin-top: 4%;">Acerca de mi</label>
-                              <textarea class="inputinfo" name="bio" id="" rows="5"  style="font-size: 1.1rem;" disabled><%= usuario[0].biografia  %> </textarea>
+                              <textarea class="inputinfo" name="bio" id="" rows="5"  style="font-size: 1.1rem;"><%= usuario.biografia  %></textarea>
                             </div>
                             
                             
+                            <button class="botonEditar" style="width: 20%; margin-top: 3%;">Confirmar cambios</button>
 
                         </div>
-                    </div>
+                    </form>
+
+
                 </div>
 
             </div>
 
             
 
-<!-- Modal verificacion -->
-<div class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Para verificarte debes 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Verificarme</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal cv -->
-<div class="modal fade" id="modalCV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sube tu CV</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            Tu CV se mostrara anexado en tus publicaciones
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Subir cv</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
             <%- include ('./partials/footer.ejs') %>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>

@@ -2,9 +2,65 @@ const { Router } = require('express');
 const express = require('express')
 const pool = require("../../database/database");
 const router = express.Router()
+const path = require('path')
 const {loggedIn,isSolicitante, isOfertante} = require('../../passport/helpers')
 
 
+router.post('/solicitante/subirportada',loggedIn,isSolicitante,  async(req, res, next) => {
+
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+ imagen = req.files.imagen
+ carpetita = path.join(__dirname + ('/uploads/portadas/'))
+
+ console.log(carpetita)
+      
+      
+    imagen.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET portada = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.post('/solicitante/subirfoto',loggedIn,isSolicitante,  async(req, res, next) => {
+
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+ imagen = req.files.imagen
+ carpetita = path.join(__dirname + ('/uploads/'))
+
+ console.log(carpetita)
+      
+      
+    imagen.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET image = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      res.redirect('/solicitante/perfil')
+      
+   }
+  
+})
+
+router.get('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, (req, res, next) => {
+
+
+  usuario = req.user
+  res.render('EditarPerfilSol.ejs',usuario)
+})
+
+router.post('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, async(req, res, next) => {
+
+  pool.query("UPDATE usuario SET biografia = ? , telefono = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.user.idusuario])
+  
+  res.redirect("/solicitante/perfil")
+})
 
 
 router.post('/oferta/postularse/:id', loggedIn,isSolicitante, async (req,res) => {
