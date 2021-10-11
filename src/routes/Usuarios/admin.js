@@ -44,8 +44,15 @@ router.post('/admin/verificar/usuario', loggedIn,isAdmin,  async(req,res,next)=>
 router.post('/admin/usuario/verificado', loggedIn,isAdmin,  async(req,res,next)=>{
     let id = req.body.id
     let verificado = req.body.verificado
-    console.log(req.body)
-    await pool.query("UPDATE usuario SET verificado = [?] WHERE idusuario = ?", [verificado,id])
+    let fecha = new Date()
+    console.log(verificado,id)
+    await pool.query("UPDATE usuario SET verificado = ? WHERE idusuario = ?", [verificado,id])
+    if(verificado == "si"){
+        await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[6,fecha,id,false])
+    }else{
+        await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[3,fecha,id,false])
+    }
+    
     //await pool.query("DELETE FROM usuario WHERE idusuario = ?",[id])
     res.redirect('/inicio/Admin')
 })

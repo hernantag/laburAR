@@ -53,7 +53,7 @@
     <form action="/admin/usuario/verificado" method="POST">
         <% usuario.forEach(element => { %>
             <div>
-                <input class="form-check-input" type="text" name="id" id="" value="<%=element.idusuario%>" aria-label="..." checked hidden>
+                <input class="form-check-input" type="text" name="id" id="" value="<%=element.idusuario%>" aria-label="..." hidden>
               </div>
         <% }) %>
         <div class="form-check form-check-inline ">
