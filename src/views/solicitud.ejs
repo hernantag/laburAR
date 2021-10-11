@@ -91,6 +91,13 @@
         <div class="modal-body">
          <p>Email de contacto: <%= usuario[0].correo  %> </p>
          <p>Telefono de contacto: <%= usuario[0].telefono  %> </p>
+
+         <% if (!usuario[0].cv) { %>
+            <p>Este usuario no tiene un CV adjuntado a su cuenta</p>
+            <% } else { %>
+                <a class="descargarCurriculum" href="/cvs/<%= usuario[0].cv %> " target="_blank">Descargar curriculum vitae</a>
+
+         <% } %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

@@ -5,6 +5,15 @@ const path = require('path')
 const { loggedIn, isOfertante, isSolicitante } = require('../../passport/helpers')
 
 
+
+router.post('/oferta/eliminarPostulante', loggedIn, isOfertante, async(req, res, next) => {
+
+  console.log(req.body.id,'asd')
+  pool.query("DELETE from postulacion WHERE ID_Postulacion = ?", [req.body.id])
+  
+  res.redirect("/empleo/misOfertas/1")
+})
+
 router.post('/ofertante/subirportada',loggedIn,isOfertante,  async(req, res, next) => {
 
 

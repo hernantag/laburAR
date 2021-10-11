@@ -123,25 +123,56 @@
             </div>
 
             
+            <% if (usuario.verificado != 'pr') { %>
+              <form class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/solicitante/verificarse" method="post" enctype="multipart/form-data">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Para verificarte, debes enviar una foto de la parte delantera de tu DNI. Uno de nuestros administradores
+                      se encargará de comprobar tus datos.
+                      <br>
+                      <br>
+                      <input type="file" name="fotoDNI" accept="image/*">
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary">Verificarme</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              
+            
+  
+              <% } else { %>
+                <form class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/solicitante/verificarse" method="post" enctype="multipart/form-data">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        
+                        ¡Tu pedido de verificacion se encuentra actualmente en proceso!
 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            <% } %>
 <!-- Modal verificacion -->
-<div class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Para verificarte debes 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Verificarme</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+
   <!-- Modal foto -->
 <form class="modal fade" id="modalfoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/solicitante/subirfoto" method="post" enctype="multipart/form-data">
   <div class="modal-dialog">
@@ -181,7 +212,7 @@
 </form>
 
   <!-- Modal cv -->
-<div class="modal fade" id="modalCV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form class="modal fade" id="modalCV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/solicitante/subircv" method="post" enctype="multipart/form-data">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -189,15 +220,15 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Tu CV se mostrara anexado en tus publicaciones
+          <input type="file" name="pdf" id="" accept="application/pdf">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Subir cv</button>
+          <button type="submit" class="btn btn-primary">Subir cv</button>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
             <%- include ('./partials/footer.ejs') %>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
