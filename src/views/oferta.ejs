@@ -82,6 +82,9 @@
                                         <form action="/oferta/eliminar/<%= oferta[0].ID_Oferta %> " method="POST">
                                         <button>Eliminar publicacion</button>
                                     </form>
+                                    <form  action="/<%= oferta[0].ID_Oferta %> " method="POST" style="margin-left: 2%;">
+                                      <button>Renovar tiempo</button>
+                                  </form>
                                     <% } %>
                 
                                 
@@ -147,7 +150,17 @@
         
                                 
                                         <div class="postulacionCnt-Tittle">
-                                            <a href="/perfil/<%= element.idusuario %>"><%= element.nombre %> <%= element.apellido %></a>
+
+                                          
+                                          <% if (element.verificado == 'si') { %>
+                                            <a href="/perfil/<%= element.idusuario %>"><%= element.nombre %> <%= element.apellido %>  <i class="fas fa-check-circle" style="color: #00ADB5;"></i></a>
+
+                                            <p></p>
+              
+                                            <% } else { %>
+                                              <a href="/perfil/<%= element.idusuario %>"><%= element.nombre %> <%= usuario.apellido %> </a>
+              
+                                          <% } %>
                                            
                                         </div>
                                        <div class="postulacionCnt-Info"><p><%= element.Descripcion %> </p></div>
