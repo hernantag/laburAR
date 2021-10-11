@@ -66,7 +66,7 @@ router.get('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, (req, res, n
 
 router.post('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, async(req, res, next) => {
 
-  pool.query("UPDATE usuario SET biografia = ? , telefono = ? , CUIT = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.body.cuit,req.user.idusuario])
+  pool.query("UPDATE usuario SET biografia = ? , telefono = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.user.idusuario])
   
   res.redirect("/ofertante/perfil")
 })
@@ -349,7 +349,27 @@ router.post('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => 
   res.redirect('/empleo/misOfertas/1')
 })
 
+router.post('/ofertante/verificarse',loggedIn,isOfertante,  async(req, res, next) => {
 
+
+  if(!req.files){
+  res.send('Selecciona un archivo')
+   }else{
+       
+    fotoDNI = req.files.fotoDNI
+ carpetita = path.join(__dirname + ('/uploads/verificaciones/'))
+
+ console.log(carpetita)
+      
+      
+ fotoDNI.mv((carpetita +  req.user.idusuario +'.jpg'))
+      pool.query("UPDATE usuario SET imgver = ? WHERE idusuario = ?", [req.user.idusuario +'.jpg',req.user.idusuario])
+      pool.query("UPDATE usuario SET verificado = 'proceso' WHERE idusuario = ?", [req.user.idusuario])
+      res.redirect('/ofertante/perfil')
+      
+   }
+  
+})
 
 
 router.get('/empleo/misOfertas/:page', loggedIn, isOfertante, async (req, res, next) => {

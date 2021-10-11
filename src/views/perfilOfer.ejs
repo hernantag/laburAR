@@ -126,10 +126,34 @@
 
             </div>
 
-            
+   
+            <% console.log(usuario.verificado) %> 
+            <% if (usuario.verificado != 'pr') { %>
 
-<!-- Modal verificacion -->
-<div class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <% if (usuario.verificado == 'si') { %>
+                <div class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/solicitante/verificarse" method="post" enctype="multipart/form-data">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¡Wuju! ¡Ya estas verificado!
+                        <br>
+                        <br>
+                        
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<% } else { %>
+  <form class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/ofertante/verificarse" method="post" enctype="multipart/form-data">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -137,15 +161,46 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Para verificarte debes 
+          Para verificarte, debes enviar una foto de la parte delantera de tu DNI. Uno de nuestros administradores
+          se encargará de comprobar tus datos.
+          <br>
+          <br>
+          <input type="file" name="fotoDNI" accept="image/*">
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Verificarme</button>
+          <button type="submit" class="btn btn-primary">Verificarme</button>
         </div>
       </div>
     </div>
-  </div>
+  </form>
+  
+                <%  } %>
+              
+             
+                 
+               
+              <% } else { %>
+                <form class="modal fade" id="modalVerificarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/ofertante/verificarse" method="post" enctype="multipart/form-data">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¡Verificarme!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        
+                        ¡Tu pedido de verificacion se encuentra actualmente en proceso!
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            <% } %>
   <!-- Modal foto -->
 <form class="modal fade" id="modalfoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" action="/ofertante/subirfoto" method="post" enctype="multipart/form-data">
   <div class="modal-dialog">
