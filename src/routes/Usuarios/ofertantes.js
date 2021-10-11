@@ -66,7 +66,7 @@ router.get('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, (req, res, n
 
 router.post('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, async(req, res, next) => {
 
-  pool.query("UPDATE usuario SET biografia = ? , telefono = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.user.idusuario])
+  pool.query("UPDATE usuario SET biografia = ? , telefono = ? , CUIT = ? WHERE idusuario = ?", [req.body.bio,req.body.telefono,req.body.cuit,req.user.idusuario])
   
   res.redirect("/ofertante/perfil")
 })
