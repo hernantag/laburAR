@@ -274,9 +274,11 @@ router.get('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => {
 
 router.post('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => {
   
+  let fechai = new Date();
+  let fechaf = new Date();
+  fechaf.setDate(fechaf.getDate() + 45)
 
-
-  await pool.query("INSERT INTO oferta (Titulo,Descripcion,Imagen,idusuario,ID_Rubro,ID_SubRubro,Nivel,fecha_i,fecha_f) VALUES (?,?,0,?,?,?,?,NOW(),NOW())",[req.body.titulo,req.body.descripcion,req.user.idusuario,req.body.rubro,req.body.subrubro,req.body.nivel])
+  await pool.query("INSERT INTO oferta (Titulo,Descripcion,Imagen,idusuario,ID_Rubro,ID_SubRubro,Nivel,fecha_i,fecha_f) VALUES (?,?,0,?,?,?,?,?,?)",[req.body.titulo,req.body.descripcion,req.user.idusuario,req.body.rubro,req.body.subrubro,req.body.nivel,fechai,fechaf])
   res.redirect('/empleo/misOfertas/1')
 })
 
