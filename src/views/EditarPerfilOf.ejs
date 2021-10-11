@@ -53,7 +53,7 @@
                 <div class="bodyinfo">
                 
 
-                    <form class="bodyinforight" style="width: 100%;" action="/ofertante/perfil/editarPerfil" method="POST">
+                    <form class="bodyinforight" style="width: 100%; height: 150vh;" action="/ofertante/perfil/editarPerfil" method="POST">
                         <div class="bodyinforight-Tittle">
                             <span>Informacion</span>
                             <i style="font-size: 0.7rem;">Los campos marcados con un * no pueden ser modificados una vez creada la cuenta</i>
@@ -86,6 +86,12 @@
 
                             <label for="" style="font-size: 1.1rem; margin-top: 3%;">E-Mail</label>
                             <input class="inputinfo" type="text" name="" id="" value="<%= usuario.correo  %>" disabled  style="font-size: 1.1rem;" disabled>
+
+                          </div>
+                          <div class="bodyinforight-infoContainer" style="height: auto;">
+
+                            <label for="" style="font-size: 1.1rem; margin-top: 3%;">CUIT</label>
+                            <input class="inputinfo" type="text" name="cuit" id="" value="<%= usuario.CUIT  %>"   style="font-size: 1.1rem;" >
 
                           </div>
 
