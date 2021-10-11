@@ -49,8 +49,13 @@
                     </div>
                         <div class="solotitulo">
                             
-                            <p><%= usuario.nombre %> <%= usuario.apellido %> </p>
-                        </div>
+                          <% if (usuario.verificado == 'si') { %>
+                            <p><%= usuario.nombre %> <%= usuario.apellido %>  <i class="fas fa-check-circle" style="color: #00ADB5;"></i></p>
+
+                            <% } else { %>
+                              <p><%= usuario.nombre %> <%= usuario.apellido %> </p>
+
+                          <% } %>                        </div>
                 </div>
 
                 <div class="bodyinfo">

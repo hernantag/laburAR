@@ -41,14 +41,23 @@ router.post('/admin/verificar/usuario', loggedIn,isAdmin,  async(req,res,next)=>
     console.log(usuario)
     res.render('verificarAdmin.ejs',{usuario})
 })
+
+
+
+
+
 router.post('/admin/usuario/verificado', loggedIn,isAdmin,  async(req,res,next)=>{
     let id = req.body.id
     let verificado = req.body.verificado
     console.log(req.body)
-    await pool.query("UPDATE usuario SET verificado = [?] WHERE idusuario = ?", [verificado,id])
+    await pool.query("UPDATE usuario SET verificado = ? WHERE idusuario = ?", [verificado,id])
     //await pool.query("DELETE FROM usuario WHERE idusuario = ?",[id])
     res.redirect('/inicio/Admin')
 })
+
+
+
+
 router.post('/admin/agregar/rubro', loggedIn,isAdmin,  async(req,res,next)=>{
     let rubro = req.body
     await pool.query("INSERT INTO rubro (Nombre) VALUES (?)",[rubro.Nombre])
