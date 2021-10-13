@@ -19,11 +19,95 @@
                             </li>
                         </div> 
                         
-                                <div class="nav-Item">
-                                    <li>
-                                        <a href="">NOTIFICACIONES</a>
-                                    </li>
-                                </div> 
+                                <li class="nav-Item dropdown">
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    NOTIFICACIONES
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 99999999; overflow-y: scroll;">
+                    <% console.log(notis) %> 
+                    <% console.log(tipo) %> 
+                    <% notis.forEach(element1 => { %>
+
+                        <% tipo.forEach(element2 => { %>
+
+                            
+                            <% if (element1.ID_Tipo==element2.ID_Tipo) { %>
+                                <% if (element2.ID_Tipo=='3') { %>
+                                    <% if (ident.tipo=='solicitante' ) { %>
+                                        <li><a class="dropdown-item" href="/solicitante/perfil">
+                                                <%= element2.Descripcion%>
+                                            </a></li>
+                                            <br>
+                                        <% } else { %>
+                                            <li><a class="dropdown-item" href="/ofertante/perfil">
+                                                    <%= element2.Descripcion%>
+                                                </a></li>
+                                                <br>
+                                        <% } %>
+                                <% } else if (element2.ID_Tipo=='6') { %>
+                                    <% if (ident.tipo=='solicitante' ) { %>
+                                            <li><a class="dropdown-item" href="/solicitante/perfil">
+                                                    <%= element2.Descripcion%>
+                                                </a></li>
+                                                <br>
+                                        <% } else { %>
+                                                <li><a class="dropdown-item" href="/ofertante/perfil">
+                                                        <%= element2.Descripcion%>
+                                                    </a></li>
+                                                    <br>
+                                        <% } %>
+                                <% } else if (element2.ID_Tipo=='1') { %>
+                                    <li><a class="dropdown-item" href="/empleo/misSolicitudes1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br>
+                                <% } else if (element2.ID_Tipo=='2') { %>    
+                                    <li><a class="dropdown-item" href="/empleo/misOfertas/1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br>
+                                <% } else if (element2.ID_Tipo=='4') { %>    
+                                    <li><a class="dropdown-item" href="/empleo/misOfertas/1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br>
+                                <% } else if (element2.ID_Tipo=='5') { %>
+                                    <li><a class="dropdown-item" href="/empleo/misSolicitudes/1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br>
+                                <% } else if (element2.ID_Tipo=='7') { %>    
+                                    <li><a class="dropdown-item" href="/empleo/misOfertas/1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br>
+                                <% } else if (element2.ID_Tipo=='8') { %>
+                                        <li><a class="dropdown-item" href="/empleo/misSolicitudes/1">
+                                            <%= element2.Descripcion%>
+                                        </a></li>
+                                        <br>  
+                                <% } else if (element2.ID_Tipo=='9') { %>    
+                                    <li><a class="dropdown-item" href="/empleo/misOfertas/1">
+                                        <%= element2.Descripcion%>
+                                    </a></li>
+                                    <br> 
+                                <% } %>
+
+
+
+
+                            <% } %>
+                            
+                        <% }) %>
+
+
+                    <% }) %>
+
+                </ul>
+
+            </li>
 
                                 <div class="nav-Item" id="logoutDiv">
                                     <li>
@@ -35,3 +119,4 @@
                             
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

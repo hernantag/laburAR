@@ -15,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;1,300&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/be85762cea.js" crossorigin="anonymous"></script>
-    <title>Oferta</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Solicitud</title>
 
 </head>
 <body>
@@ -65,6 +66,9 @@
                         <form action="/solicitud/eliminar/<%= oferta[0].ID_Solicitud %> " method="POST">
                         <button type="submit">Eliminar publicacion</button>
                          </form>
+                         <form  action="/solicitante/renovar/tiempo/<%= oferta[0].ID_Solicitud %> " method="POST" style="margin-left: 2%;">
+                            <button>Renovar tiempo</button>
+                        </form>
                     <% } %>
 
                 
@@ -106,7 +110,6 @@
     </div>
   </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
