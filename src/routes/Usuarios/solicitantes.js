@@ -94,11 +94,15 @@ router.post('/solicitante/subirfoto',loggedIn,isSolicitante,  async(req, res, ne
   
 })
 
-router.get('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, (req, res, next) => {
+router.get('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, async(req, res, next) => {
 
 
   usuario = req.user
-  res.render('EditarPerfilSol.ejs',usuario)
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  res.render('EditarPerfilSol.ejs',{usuario,ident,notis,tipo})
 })
 
 router.post('/solicitante/perfil/editarPerfil', loggedIn, isSolicitante, async(req, res, next) => {
@@ -136,7 +140,11 @@ router.get('/perfil/:id', loggedIn, async (req, res, next) => {
   iduser = req.params.id
   usuario = await pool.query("SELECT * FROM usuario WHERE idusuario = ?",[iduser])
   
-  res.render('perfilSoliMod.ejs',usuario)
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  res.render('perfilSoliMod.ejs',{ident,notis,tipo,usuario})
 })
 
 
@@ -152,7 +160,11 @@ router.get('/empleo/solicitud/:id', loggedIn, async (req,res,next) =>{
   subrubro = await pool.query("SELECT Nombre FROM subrubro WHERE ID_SubRubro = ?",[oferta[0].ID_SubRubro])
   usuariologueado = req.user
 
-  res.render('solicitud.ejs',{oferta,usuario,rubro,subrubro,usuariologueado})
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  res.render('solicitud.ejs',{ident,notis,tipo,oferta,usuario,rubro,subrubro,usuariologueado})
 })
 
 
@@ -167,8 +179,11 @@ router.get('/empleo/oferta/:id', loggedIn, async (req,res,next) =>{
   usuariologueado = req.user
   postulaciones = await pool.query("SELECT * FROM postulacion p JOIN usuario o ON p.idusuario = o.idusuario WHERE ID_Oferta = ?",[oferta[0].ID_Oferta])
   
-
-  res.render('oferta.ejs',{oferta,usuario,rubro,subrubro,usuariologueado,postulaciones})
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  res.render('oferta.ejs',{ident,notis,tipo,oferta,usuario,rubro,subrubro,usuariologueado,postulaciones})
 })
 
 router.get('/solicitante/empleo', loggedIn,isSolicitante,  (req,res,next) =>{
@@ -210,9 +225,13 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
     let rubroSeleccionado = 'vacio'
     let nivel = 'vacio'
   
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
     //RENDERIZAMOS LA PAG
     res.render('empleoSoli.ejs', {
-        ofertas, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
+        ident,notis,tipo,ofertas, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
   
     })
   
@@ -350,10 +369,14 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
   
       //enviamos todos los rubros
       let rubros = await (pool.query("SELECT Nombre FROM rubro"))
-  
+      
+      //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
       //RENDERIZAMOS
       res.render('empleoSoli.ejs', {
-        ofertas, nombre, pagina, total, consulta, filtrando, consultaconlimit,
+        ident,notis,tipo,ofertas, nombre, pagina, total, consulta, filtrando, consultaconlimit,
         rubroSeleccionado, listaSubRubros, rubros, subrubroSeleccionado, nivel
   
       })
@@ -387,19 +410,31 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
     let total = await pool.query(consulta);
     total = total.length
     let filtrando = 1
-  
+    
+
+
+
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
     res.render('empleoSoli.ejs', {
-      ofertas, nombre, pagina, total, filtrando, consulta, rubros
+      ofertas, nombre, pagina, total, filtrando, consulta, rubros,ident,notis,tipo
   
     })
   
   })
 
-  router.get('/solicitante/perfil', loggedIn, isSolicitante, (req, res, next) => {
+  router.get('/solicitante/perfil', loggedIn, isSolicitante, async(req, res, next) => {
 
 
     usuario = req.user
-    res.render('perfilSoli.ejs',usuario)
+
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
+    res.render('perfilSoli.ejs',{usuario,notis,ident,tipo})
   })
   
   router.get('/empleo/agregarSolicitud', loggedIn, isSolicitante, async (req, res, next) => {
@@ -409,7 +444,12 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
     rubros = await pool.query("SELECT Nombre,ID_Rubro FROM rubro")
 
     usuario = req.user
-    res.render('agregarSoli.ejs',{subrubros,rubros})
+
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
+    res.render('agregarSoli.ejs',{subrubros,rubros,ident,notis,tipo})
   })
 
   router.post('/empleo/agregarSolicitud', loggedIn, isSolicitante, async (req, res) => {
@@ -455,10 +495,14 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
     //CARGAR EL RUBRO SELECCIONADO COMO VACIO (PORQUE TODAVIA NO HICIMOS CLICK EN FILTRAR)
     let rubroSeleccionado = 'vacio'
     let nivel = 'vacio'
-  
+    
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
     //RENDERIZAMOS LA PAG
     res.render('MisSolicitudes.ejs', {
-      solicitudes, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
+      ident,notis,tipo,solicitudes, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
   
     })
   })
@@ -606,10 +650,15 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
   
       //enviamos todos los rubros
       let rubros = await (pool.query("SELECT Nombre FROM rubro"))
-  
+      
+
+      //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
       //RENDERIZAMOS
       res.render('MisSolicitudes.ejs', {
-        solicitudes, nombre, pagina, total, consulta, filtrando, consultaconlimit,
+        ident,notis,tipo,solicitudes, nombre, pagina, total, consulta, filtrando, consultaconlimit,
         rubroSeleccionado, listaSubRubros, rubros, subrubroSeleccionado, nivel
   
       })
@@ -643,12 +692,25 @@ router.get('/solicitante/empleo/:page', loggedIn, isSolicitante, async (req, res
     let total = await pool.query(consulta);
     total = total.length
     let filtrando = 1
-  
+    //NOTIFICACIONES
+    ident = req.user
+    notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+    tipo = await pool.query("SELECT * FROM tipo")
     res.render('MisSolicitudes.ejs', {
-      solicitudes, nombre, pagina, total, filtrando, consulta, rubros
+      solicitudes,ident,notis,tipo, nombre, pagina, total, filtrando, consulta, rubros
   
     })
   
+  })
+
+  router.post('/solicitante/renovar/tiempo/:id', loggedIn, isSolicitante, async (req, res) => {
+    id = req.params.id
+    let fechai = new Date();
+    let fechaf = new Date();
+    fechaf.setDate(fechaf.getDate() + 90)
+  
+    await pool.query("UPDATE solicitud SET fecha_i = ?, fecha_f = ? WHERE ID_Solicitud = ?",[fechai,fechaf,id])
+    res.redirect('/empleo/misSolicitudes/1')
   })
   
 module.exports = router;

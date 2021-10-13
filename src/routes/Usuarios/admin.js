@@ -87,6 +87,47 @@ router.post('/admin/eliminar/subrubro', loggedIn,isAdmin,  async(req,res,next)=>
     await pool.query("DELETE FROM subrubro WHERE ID_SubRubro = ?",[id])
     res.redirect('/inicio/Admin')
 })
+router.post('/admin/actualizacion', loggedIn,isAdmin,  async(req,res,next)=>{
+    let hoy = new Date();
+    let mañana = new Date()
+    mañana.setDate(mañana.getDate() + 5)
+    let ofertas = await pool.query("SELECT * FROM oferta WHERE DATE(fecha_f) BETWEEN DATE(?) AND DATE(?)", [hoy,mañana])
+    console.log(ofertas)
+    for (let index = 0; index < ofertas.length; index++) {
+        const element = ofertas[index]
+        
+        if (element.fecha_f.getDate() == hoy.getDate()) {
+            console.log(element.fecha_f.getDate(), hoy.getDate())
+            console.log("llegoche")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[7,hoy,element.idusuario,false])
+            await pool.query("DELETE FROM oferta WHERE idusuario = ? AND fecha_f = DATE(?)", [element.idusuario,hoy])
+        }else{
+            console.log(element.fecha_f.getDate(), hoy.getDate())
+            console.log("llegoche2")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[4,hoy,element.idusuario,false])
+        }
+        
+    }
+    let solicitudes = await pool.query("SELECT * FROM solicitud WHERE DATE(fecha_f) BETWEEN DATE(?) AND DATE(?)", [hoy,mañana])
+    console.log(solicitudes)
+    for (let index = 0; index < solicitudes.length; index++) {
+        const element = solicitudes[index]
+        
+        if (element.fecha_f.getDate() == hoy.getDate()) {
+            console.log(element.fecha_f.getDate(), hoy.getDate())
+            console.log("llegoche")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[8,hoy,element.idusuario,false])
+            await pool.query("DELETE FROM solicitud WHERE idusuario = ? AND fecha_f = DATE(?)", [element.idusuario,hoy])
+        }else{
+            console.log(element.fecha_f.getDate(), hoy.getDate())
+            console.log("llegoche2")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[5,hoy,element.idusuario,false])
+        }
+        
+    }
+    
+    res.redirect('/inicio/Admin')
+})
 
 
 

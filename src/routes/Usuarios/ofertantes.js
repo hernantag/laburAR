@@ -57,11 +57,16 @@ router.post('/ofertante/subirfoto',loggedIn,isOfertante,  async(req, res, next) 
 })
 
 
-router.get('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, (req, res, next) => {
+router.get('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, async(req, res, next) => {
 
 
-  usuario = req.user
-  res.render('EditarPerfilOf.ejs',usuario)
+  usuario = req.user 
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  
+  res.render('EditarPerfilOf.ejs',{usuario,notis,tipo, ident})
 })
 
 router.post('/ofertante/perfil/editarPerfil', loggedIn, isOfertante, async(req, res, next) => {
@@ -82,11 +87,15 @@ router.post('/oferta/eliminar/:idof', loggedIn, async (req,res) => {
 })
 
 
-router.get('/ofertante/perfil', loggedIn, isOfertante, (req, res, next) => {
+router.get('/ofertante/perfil', loggedIn, isOfertante, async(req, res, next) => {
 
 
   usuario = req.user
-  res.render('perfilOfer.ejs',usuario)
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+  res.render('perfilOfer.ejs',{usuario,notis,tipo,ident})
 })
 
 router.get('/Ofertante/Empleo', loggedIn, isOfertante, async (req, res, next) => {
@@ -129,9 +138,14 @@ router.get('/Ofertante/Empleo/:page', loggedIn, isOfertante, async (req, res, ne
   let rubroSeleccionado = 'vacio'
   let nivel = 'vacio'
 
+
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
   //RENDERIZAMOS LA PAG
   res.render('empleoOfer.ejs', {
-    solicitudes, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
+    notis,tipo,solicitudes, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel, ident
 
   })
 
@@ -271,9 +285,15 @@ router.post("/Ofertante/Empleo/Filter/:page", loggedIn, isOfertante, async (req,
     //enviamos todos los rubros
     let rubros = await (pool.query("SELECT Nombre FROM rubro"))
 
+
+    //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+
     //RENDERIZAMOS
     res.render('empleoOfer.ejs', {
-      solicitudes, nombre, pagina, total, consulta, filtrando, consultaconlimit,
+      ident,notis,tipo,solicitudes, nombre, pagina, total, consulta, filtrando, consultaconlimit,
       rubroSeleccionado, listaSubRubros, rubros, subrubroSeleccionado, nivel
 
     })
@@ -317,8 +337,13 @@ router.get('/Ofertante/Empleo/Filter/:page/:query', loggedIn, isOfertante, async
   total = total.length
   let filtrando = 1
 
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+
   res.render('empleoOfer.ejs', {
-    solicitudes, nombre, pagina, total, filtrando, consulta, rubros
+    solicitudes, nombre, pagina, total, filtrando, consulta, rubros, notis, tipo, ident
 
   })
 
@@ -332,10 +357,14 @@ router.get('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => {
 
 
   rubros = await pool.query("SELECT Nombre,ID_Rubro FROM rubro")
-
+  
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
   
   
-  res.render('agregarOfer',{rubros,subrubros})
+  res.render('agregarOfer',{rubros,subrubros,ident,notis,tipo})
 })
 
 
@@ -346,6 +375,7 @@ router.post('/empleo/agregarOferta', loggedIn, isOfertante, async (req, res) => 
   fechaf.setDate(fechaf.getDate() + 45)
 
   await pool.query("INSERT INTO oferta (Titulo,Descripcion,Imagen,idusuario,ID_Rubro,ID_SubRubro,Nivel,fecha_i,fecha_f) VALUES (?,?,0,?,?,?,?,?,?)",[req.body.titulo,req.body.descripcion,req.user.idusuario,req.body.rubro,req.body.subrubro,req.body.nivel,fechai,fechaf])
+  await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,Now(),?,?)",[2,req.user.idusuario,false])
   res.redirect('/empleo/misOfertas/1')
 })
 
@@ -405,9 +435,14 @@ router.get('/empleo/misOfertas/:page', loggedIn, isOfertante, async (req, res, n
   let rubroSeleccionado = 'vacio'
   let nivel = 'vacio'
 
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
+
   //RENDERIZAMOS LA PAG
   res.render('MisOfertas.ejs', {
-    ofertas, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
+    ident, notis, tipo,ofertas, nombre, pagina, total, filtrando, rubros, rubroSeleccionado, nivel
 
   })
 })
@@ -558,9 +593,13 @@ router.post("/empleo/misOfertas/:page", loggedIn, isOfertante, async (req, res, 
     //enviamos todos los rubros
     let rubros = await (pool.query("SELECT Nombre FROM rubro"))
 
+    //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
     //RENDERIZAMOS
     res.render('MisOfertas.ejs', {
-      ofertas, nombre, pagina, total, consulta, filtrando, consultaconlimit,
+      ident,notis,tipo,ofertas, nombre, pagina, total, consulta, filtrando, consultaconlimit,
       rubroSeleccionado, listaSubRubros, rubros, subrubroSeleccionado, nivel
 
     })
@@ -597,12 +636,24 @@ router.get('/empleo/misOfertas/Filter/:page/:query', loggedIn, isOfertante, asyn
   total = total.length
   let filtrando = 1
 
+  //NOTIFICACIONES
+  ident = req.user
+  notis = await pool.query("SELECT * FROM notificacion WHERE idusuario = ?", [req.user.idusuario])
+  tipo = await pool.query("SELECT * FROM tipo")
   res.render('misOfertas.ejs', {
-    ofertas, nombre, pagina, total, filtrando, consulta, rubros
+    ident,tipo,notis,ofertas, nombre, pagina, total, filtrando, consulta, rubros
 
   })
 
 })
+router.post('/ofertante/renovar/tiempo/:id', loggedIn, isOfertante, async (req, res) => {
+  id = req.params.id
+  let fechai = new Date();
+  let fechaf = new Date();
+  fechaf.setDate(fechaf.getDate() + 200)
 
+  await pool.query("UPDATE oferta SET fecha_i = ?, fecha_f = ? WHERE ID_Oferta = ?",[fechai,fechaf,id])
+  res.redirect('/empleo/misOfertas/1')
+})
 
 module.exports = router;
