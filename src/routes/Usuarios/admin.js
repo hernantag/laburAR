@@ -87,6 +87,48 @@ router.post('/admin/eliminar/subrubro', loggedIn,isAdmin,  async(req,res,next)=>
     await pool.query("DELETE FROM subrubro WHERE ID_SubRubro = ?",[id])
     res.redirect('/inicio/Admin')
 })
+router.post('/admin/actualizacion', loggedIn,isAdmin,  async(req,res,next)=>{
+    let hoy = new Date();
+    let mañanaofer = new Date();
+    mañanaofer.setDate(mañanaofer.getDate() + 5)
+    let ofertas = await pool.query("SELECT * FROM oferta WHERE fecha_f >= ? AND fecha_f < ?", [hoy,mañanaofer])
+    console.log(ofertas)
+    /*ofertas.forEach (element, async=> {
+        if (element.fecha_f == hoy) {
+            pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[7,hoy,element.idusuario,false])
+            pool.query("DELETE FROM oferta WHERE idusuario = ? AND fecha_f = ?", [element.idusuario,hoy])
+        }else{
+            pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[4,hoy,element.idusuario,false])
+        }
+    })*/
+    for (let index = 0; index < ofertas.length; index++) {
+        const element = ofertas[index];
+        if (element.fecha_f == hoy) {
+            console.log("llegoche")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[7,hoy,element.idusuario,false])
+            await pool.query("DELETE FROM ofeta WHERE idusuario = ? AND fecha_f = ?", [element.idusuario,hoy])
+        }else{
+            console.log("llegoche")
+            await pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[4,hoy,element.idusuario,false])
+        }
+        
+    }
+
+
+    mañanasoli = new Date();
+    mañanasoli.setDate(mañanasoli.getDate() + 5)
+    let solicitudes = await pool.query("SELECT * FROM solicitud WHERE fecha_f >= ? AND fecha_f < ?", [hoy,mañanasoli])
+    solicitudes.forEach(element => {
+        if (element.fecha_f == hoy) {
+            pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[8,hoy,element.idusuario,false])
+            pool.query("DELETE FROM solicitud WHERE idusuario = ? AND fecha_f = ?", [element.idusuario,hoy])
+        }else{
+            pool.query("INSERT INTO notificacion( ID_Tipo, Fecha, idusuario, visto) VALUES (?,?,?,?)",[4,hoy,element.idusuario,false])
+        }
+    })
+    
+    res.redirect('/inicio/Admin')
+})
 
 
 
