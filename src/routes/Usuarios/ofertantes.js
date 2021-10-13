@@ -540,7 +540,7 @@ router.post("/empleo/misOfertas/:page", loggedIn, isOfertante, async (req, res, 
     let consultaconlimit = consulta + ' LIMIT ?,?'
 
     let page = ((req.params.page - 1) * 5)
-    let solicitudes = await pool.query(consultaconlimit, [page, 5])
+    let ofertas = await pool.query(consultaconlimit, [page, 5])
     let nombre = req.user.nombre
     let pagina = req.params.page
 
@@ -560,7 +560,7 @@ router.post("/empleo/misOfertas/:page", loggedIn, isOfertante, async (req, res, 
 
     //RENDERIZAMOS
     res.render('MisOfertas.ejs', {
-      solicitudes, nombre, pagina, total, consulta, filtrando, consultaconlimit,
+      ofertas, nombre, pagina, total, consulta, filtrando, consultaconlimit,
       rubroSeleccionado, listaSubRubros, rubros, subrubroSeleccionado, nivel
 
     })
@@ -590,7 +590,7 @@ router.get('/empleo/misOfertas/Filter/:page/:query', loggedIn, isOfertante, asyn
   let page = ((req.params.page - 1) * 5)
 
 
-  let solicitudes = await pool.query(consultaconlimit, [page, 5]);
+  let ofertas = await pool.query(consultaconlimit, [page, 5]);
   let nombre = req.user.nombre
   let pagina = (req.params.page)
   let total = await pool.query(consulta);
@@ -598,7 +598,7 @@ router.get('/empleo/misOfertas/Filter/:page/:query', loggedIn, isOfertante, asyn
   let filtrando = 1
 
   res.render('misOfertas.ejs', {
-    solicitudes, nombre, pagina, total, filtrando, consulta, rubros
+    ofertas, nombre, pagina, total, filtrando, consulta, rubros
 
   })
 
